@@ -33,23 +33,28 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_USERS = "create table "
-            + TABLE_USERS + "(" + UID
-            + " integer primary key autoincrement, " + USERNAME
-            + " text not null," + NAME + "text not null" + PASSWORD + "text not null" +")";
+            + TABLE_USERS + " ("
+            + UID + " integer primary key autoincrement, "
+            + USERNAME + " text not null, "
+            + NAME + " text not null, "
+            + PASSWORD + " text not null" +")";
 
     private static final String DATABASE_CREATE_BIKES = "create table "
         + TABLE_BIKES + " ("
-        + BID + "integer primary key autoincrement, "
-        + "FOREIGN KEY(" + UID + ") REFERENCES" + TABLE_USERS + "(" + UID + "), "
-        + LOCATION_LAT + "REAL, "
-        + LOCATION_LONG + "REAL, "
-        + ISAVAILABLE + "INTEGER, "
-        + LIKES + "integer" + ")";
+        + BID + " integer primary key autoincrement, "
+        + UID + " INTEGER, "
+        + LOCATION_LAT + " REAL, "
+        + LOCATION_LONG + " REAL, "
+        + ISAVAILABLE + " INTEGER, "
+        + LIKES + " INTEGER, "
+        + "FOREIGN KEY (" + UID + ") REFERENCES " + TABLE_USERS + "(" + UID + ")" +")";
 
     private static final String DATABASE_CREATE_VOTES = "create table "
         + TABLE_VOTES + " (" 
-        + "FOREIGN KEY (" + BID + ") REFERENCES" + TABLE_BIKES + "(" + BID + "), "
-        + "FOREIGN KEY (" + UID + ") REFERENCES" + TABLE_USERS + "(" + UID + ")"
+        + BID + " INTEGER, "
+        + UID + " INTEGER, "
+        + "FOREIGN KEY (" + BID + ") REFERENCES " + TABLE_BIKES + "(" + BID + "), "
+        + "FOREIGN KEY (" + UID + ") REFERENCES " + TABLE_USERS + "(" + UID + ")"
         + " )";
 
     public SQLHelper(Context context) {
@@ -58,6 +63,11 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
+        // Check if sql commands are concatenated correctly
+        Log.d("Create Users", DATABASE_CREATE_USERS);
+        Log.d("Create Bikes", DATABASE_CREATE_BIKES);
+        Log.d("Create Votes", DATABASE_CREATE_VOTES);
+
         database.execSQL(DATABASE_CREATE_USERS);
         database.execSQL(DATABASE_CREATE_BIKES);
         database.execSQL(DATABASE_CREATE_VOTES);
