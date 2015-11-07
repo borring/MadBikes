@@ -11,25 +11,25 @@ import android.util.Log;
 public class SQLHelper extends SQLiteOpenHelper {
 
     static class Users {
-        public static final String TABLE_NAME = "USERS";
+        public static final String TABLE_NAME = "Users";
         public static final String UID = "_id";
-        public static final String NAME = "NAME";
-        public static final String USERNAME = "USERNAME";
-        public static final String PASSWORD = "PASSWORD";
+        public static final String NAME = "Name";
+        public static final String USERNAME = "Username";
+        public static final String PASSWORD = "Password";
     }
 
     static class Bikes {
-        public static final String TABLE_NAME = "BIKES";
+        public static final String TABLE_NAME = "Bikes";
         public static final String BID = "_id";
         public static final String UID = "UID";
-        public static final String LOCATION_LAT = "LATITUDE";
-        public static final String LOCATION_LONG = "LONGITUDE";
-        public static final String ISAVAILABLE = "ISAVAILABLE";
-        public static final String LIKES = "LIKES";
+        public static final String LAT = "Latitude";
+        public static final String LONG = "Longitude";
+        public static final String ISAVAILABLE = "isAvailable";
+        public static final String LIKES = "Likes";
     }
 
     static class Votes {
-        public static final String TABLE_NAME = "VOTES";
+        public static final String TABLE_NAME = "Votes";
         public static final String UID = "UID";
         public static final String BID = "BID";
     }
@@ -42,24 +42,24 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database creation sql statement
-    private static final String DATABASE_CREATE_USERS = "create table "
+    private static final String DATABASE_CREATE_USERS = "CREATE TABLE "
         + USERS.TABLE_NAME + " ("
-        + USERS.UID + " integer primary key autoincrement, "
-        + USERS.USERNAME + " text not null, "
-        + USERS.NAME + " text not null, "
-        + USERS.PASSWORD + " text not null" +")";
+        + USERS.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + USERS.USERNAME + " TEXT NOT NULL, "
+        + USERS.NAME + " TEXT NOT NULL, "
+        + USERS.PASSWORD + " TEXT NOT NULL" +")";
 
-    private static final String DATABASE_CREATE_BIKES = "create table "
+    private static final String DATABASE_CREATE_BIKES = "CREATE TABLE "
         + BIKES.TABLE_NAME + " ("
-        + BIKES.BID + " integer primary key autoincrement, "
+        + BIKES.BID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + BIKES.UID + " INTEGER, "
-        + BIKES.LOCATION_LAT + " REAL, "
-        + BIKES.LOCATION_LONG + " REAL, "
+        + BIKES.LAT + " REAL, "
+        + BIKES.LONG + " REAL, "
         + BIKES.ISAVAILABLE + " INTEGER, "
         + BIKES.LIKES + " INTEGER, "
         + "FOREIGN KEY (" + BIKES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")" +")";
 
-    private static final String DATABASE_CREATE_VOTES = "create table "
+    private static final String DATABASE_CREATE_VOTES = "CREATE TABLE "
         + VOTES.TABLE_NAME + " (" 
         + VOTES.BID + " INTEGER, "
         + VOTES.UID + " INTEGER, "
