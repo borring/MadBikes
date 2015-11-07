@@ -12,7 +12,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     static class Users {
         public static final String TABLE_NAME = "USERS";
-        public static final String UID = "UID";
+        public static final String UID = "_id";
         public static final String NAME = "NAME";
         public static final String USERNAME = "USERNAME";
         public static final String PASSWORD = "PASSWORD";
@@ -20,7 +20,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     static class Bikes {
         public static final String TABLE_NAME = "BIKES";
-        public static final String BID = "BID";
+        public static final String BID = "_id";
         public static final String UID = "UID";
         public static final String LOCATION_LAT = "LATITUDE";
         public static final String LOCATION_LONG = "LONGITUDE";
