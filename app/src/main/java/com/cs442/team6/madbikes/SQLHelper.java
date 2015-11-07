@@ -10,51 +10,61 @@ import android.util.Log;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
-    public static final String TABLE_USERS = "USERS";
-    public static final String UID = "UID";
-    public static final String NAME = "NAME";
-    public static final String USERNAME = "USERNAME";
-    public static final String PASSWORD = "PASSWORD";
+    static class Users {
+        public static final String TABLE_NAME = "USERS";
+        public static final String UID = "UID";
+        public static final String NAME = "NAME";
+        public static final String USERNAME = "USERNAME";
+        public static final String PASSWORD = "PASSWORD";
+    }
 
+    static class Bikes {
+        public static final String TABLE_NAME = "BIKES";
+        public static final String BID = "BID";
+        public static final String UID = "UID";
+        public static final String LOCATION_LAT = "LATITUDE";
+        public static final String LOCATION_LONG = "LONGITUDE";
+        public static final String ISAVAILABLE = "ISAVAILABLE";
+        public static final String LIKES = "LIKES";
+    }
 
-    public static final String TABLE_BIKES = "BIKES";
-    public static final String BID = "BID";
-    public static final String LOCATION_LAT = "LATITUDE";
-    public static final String LOCATION_LONG = "LONGITUDE";
-    public static final String ISAVAILABLE = "ISAVAILABLE";
-    public static final String LIKES = "LIKES";
+    static class Votes {
+        public static final String TABLE_NAME = "VOTES";
+        public static final String UID = "UID";
+        public static final String BID = "BID";
+    }
 
-
-    public static final String TABLE_VOTES = "VOTES";
-
+    static Users USERS = new Users();
+    static Bikes BIKES = new Bikes();
+    static Votes VOTES = new Votes();
 
     private static final String DATABASE_NAME = "MAD.DB";
     private static final int DATABASE_VERSION = 1;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE_USERS = "create table "
-            + TABLE_USERS + " ("
-            + UID + " integer primary key autoincrement, "
-            + USERNAME + " text not null, "
-            + NAME + " text not null, "
-            + PASSWORD + " text not null" +")";
+        + USERS.TABLE_NAME + " ("
+        + USERS.UID + " integer primary key autoincrement, "
+        + USERS.USERNAME + " text not null, "
+        + USERS.NAME + " text not null, "
+        + USERS.PASSWORD + " text not null" +")";
 
     private static final String DATABASE_CREATE_BIKES = "create table "
-        + TABLE_BIKES + " ("
-        + BID + " integer primary key autoincrement, "
-        + UID + " INTEGER, "
-        + LOCATION_LAT + " REAL, "
-        + LOCATION_LONG + " REAL, "
-        + ISAVAILABLE + " INTEGER, "
-        + LIKES + " INTEGER, "
-        + "FOREIGN KEY (" + UID + ") REFERENCES " + TABLE_USERS + "(" + UID + ")" +")";
+        + BIKES.TABLE_NAME + " ("
+        + BIKES.BID + " integer primary key autoincrement, "
+        + BIKES.UID + " INTEGER, "
+        + BIKES.LOCATION_LAT + " REAL, "
+        + BIKES.LOCATION_LONG + " REAL, "
+        + BIKES.ISAVAILABLE + " INTEGER, "
+        + BIKES.LIKES + " INTEGER, "
+        + "FOREIGN KEY (" + BIKES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")" +")";
 
     private static final String DATABASE_CREATE_VOTES = "create table "
-        + TABLE_VOTES + " (" 
-        + BID + " INTEGER, "
-        + UID + " INTEGER, "
-        + "FOREIGN KEY (" + BID + ") REFERENCES " + TABLE_BIKES + "(" + BID + "), "
-        + "FOREIGN KEY (" + UID + ") REFERENCES " + TABLE_USERS + "(" + UID + ")"
+        + VOTES.TABLE_NAME + " (" 
+        + VOTES.BID + " INTEGER, "
+        + VOTES.UID + " INTEGER, "
+        + "FOREIGN KEY (" + VOTES.BID + ") REFERENCES " + BIKES.TABLE_NAME + "(" + BIKES.BID + "), "
+        + "FOREIGN KEY (" + VOTES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")"
         + " )";
 
     public SQLHelper(Context context) {
@@ -78,9 +88,9 @@ public class SQLHelper extends SQLiteOpenHelper {
         Log.w(SQLHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BIKES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VOTES);
+        db.execSQL("DROP TABLE IF EXISTS " + USERS.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + BIKES.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + VOTES.TABLE_NAME);
         onCreate(db);
     }
 
