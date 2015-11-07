@@ -37,12 +37,20 @@ public class SQLHelper extends SQLiteOpenHelper {
             + " integer primary key autoincrement, " + USERNAME
             + " text not null," + NAME + "text not null" + PASSWORD + "text not null" +")";
 
-    private static final String DATABASE_CREATE_BIKES = "create table" + TABLE_BIKES + "(" + BID + "integer primary key autoincrement," +
-            "FOREIGN KEY("+ UID + ") REFERENCES"+ TABLE_USERS +"("+UID+")"+ LOCATION_LAT+ "REAL" + LOCATION_LONG + "REAL" + ISAVAILABLE + "INTEGER"
-            + LIKES + "integer" +")";
+    private static final String DATABASE_CREATE_BIKES = "create table "
+        + TABLE_BIKES + " ("
+        + BID + "integer primary key autoincrement, "
+        + "FOREIGN KEY(" + UID + ") REFERENCES" + TABLE_USERS + "(" + UID + "), "
+        + LOCATION_LAT + "REAL, "
+        + LOCATION_LONG + "REAL, "
+        + ISAVAILABLE + "INTEGER, "
+        + LIKES + "integer" + ")";
 
-    private static final String DATABASE_CREATE_VOTES = "create table" + TABLE_VOTES + "(" + "FOREIGN KEY (" + BID + ") REFERENCES" + TABLE_BIKES +
-            "("+BID+")" + "(" + "FOREIGN KEY (" + UID + ") REFERENCES" + TABLE_USERS + "("+ UID +")"+")";
+    private static final String DATABASE_CREATE_VOTES = "create table "
+        + TABLE_VOTES + " (" 
+        + "FOREIGN KEY (" + BID + ") REFERENCES" + TABLE_BIKES + "(" + BID + "), "
+        + "FOREIGN KEY (" + UID + ") REFERENCES" + TABLE_USERS + "(" + UID + ")"
+        + " )";
 
     public SQLHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
