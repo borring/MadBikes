@@ -34,9 +34,9 @@ public class SQLHelper extends SQLiteOpenHelper {
         public static final String BID = "BID";
     }
 
-    static Users USERS = new Users();
-    static Bikes BIKES = new Bikes();
-    static Votes VOTES = new Votes();
+    static final Users USERS = new Users();
+    static final Bikes BIKES = new Bikes();
+    static final Votes VOTES = new Votes();
 
     private static final String DATABASE_NAME = "MAD.DB";
     private static final int DATABASE_VERSION = 1;
