@@ -63,7 +63,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         + BIKES.LONG + " REAL, "
         + BIKES.ISAVAILABLE + " INTEGER, "
         + BIKES.RATE + "REAL,"
-        + BIKES.IMAGE_KEY + "TEXT,"
+        + BIKES.IMAGE_KEY + "BLOB,"
         + BIKES.CONDITION + "TEXT, "
         + BIKES.LIKES + " INTEGER, "
         + "FOREIGN KEY (" + BIKES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")" +")";
