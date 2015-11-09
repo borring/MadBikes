@@ -20,6 +20,8 @@ public class Utilities {
         db = dbhelper.getWritableDatabase();
 	}
 
+   // public int insertDb()
+
 	public int getPopularity(int BID) {
         int ret;
 
