@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#90CAF9"
+    android:clickable="false"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cshe"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/ea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cshe@hawk.iit.edu"
+        android:layout_below="@id/user"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        />
+    <!--Button
+        android:id="@+id/email_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="MAIL OWNER"
+        android:layout_marginRight="20dp"
+        android:background="#0aaefa"
+        android:textSize="10dp"
+        android:layout_above="@+id/text_owner"
+        android:layout_toEndOf="@+id/delete" /-->
+    <TextView
+        android:id="@+id/pn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1-872-202-1136"
+        android:layout_below="@id/ea"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        />
+    <!--Button
+        android:id="@+id/text_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="TEXT  OWNER"
+        android:layout_marginRight="20dp"
+        android:background="#0aaefa"
+        android:textSize="10dp"
+        android:layout_above="@+id/bikelist"
+        android:layout_alignStart="@+id/email_owner" /-->
+    <TextView
+        android:id="@+id/bikelist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LIST OF YOUR BIKES:"
+        android:layout_below="@id/pn"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3px"
+        android:background="#3F51B5"
+        android:layout_below="@id/bikelist">
+        </View>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/linearLayout">
+
+    <Button
+        android:id="@+id/add_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Add"
+        android:background="@drawable/add_edit_delete"
+
+         />
+    <Button
+        android:id="@+id/edit_bike1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Edit"
+        android:background="@drawable/add_edit_delete"
+        android:layout_alignTop="@+id/add_new"
+       />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Delete"
+        android:background="@drawable/add_edit_delete"
+
+        />
+</LinearLayout>
+</RelativeLayout>
+
