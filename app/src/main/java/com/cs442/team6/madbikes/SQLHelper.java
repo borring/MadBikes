@@ -52,19 +52,20 @@ public class SQLHelper extends SQLiteOpenHelper {
         + USERS.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + USERS.USERNAME + " TEXT NOT NULL, "
         + USERS.NAME + " TEXT NOT NULL, "
-        + USERS.PASSWORD + " TEXT NOT NULL," + USERS.PHONE + "INTEGER NOT NULL," + ")";
+        + USERS.PASSWORD + " TEXT NOT NULL, "
+        + USERS.PHONE + " INTEGER NOT NULL" + ")";
 
     private static final String DATABASE_CREATE_BIKES = "CREATE TABLE "
         + BIKES.TABLE_NAME + " ("
         + BIKES.BID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + BIKES.UID + " INTEGER, "
-        + BIKES.ADDRESS + "TEXT NOT NULL,"
+        + BIKES.ADDRESS + " TEXT NOT NULL, "
         + BIKES.LAT + " REAL, "
         + BIKES.LONG + " REAL, "
         + BIKES.ISAVAILABLE + " INTEGER, "
-        + BIKES.RATE + "REAL,"
-        + BIKES.IMAGE_KEY + "BLOB,"
-        + BIKES.CONDITION + "TEXT, "
+        + BIKES.RATE + " REAL,"
+        + BIKES.IMAGE_KEY + " BLOB, "
+        + BIKES.CONDITION + " TEXT, "
         + BIKES.LIKES + " INTEGER, "
         + "FOREIGN KEY (" + BIKES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")" +")";
 
