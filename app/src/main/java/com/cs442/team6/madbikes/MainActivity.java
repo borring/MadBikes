@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String username = user.getText().toString().trim();
                     String password = pass.getText().toString().trim();
                     if (username.equals("cshe") && password.equals("123")) {
-                        Intent signin_intent = new Intent(MainActivity.this, SignIn.class);
+                        Intent signin_intent = new Intent(MainActivity.this, MapsActivity.class);
                         this.startActivity(signin_intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
