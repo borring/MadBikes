@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 /**
  * Created by moymoy on 11/7/15.
@@ -25,9 +27,9 @@ public class Utilities {
     String AUTH_FILE = "auth";
     String AUTH_FLAG = "isAuth";
 
-	Utilities(Context c, SQLHelper dbhelper) {
+	Utilities(Context c) {
 		this.c = c;
-		this.dbhelper = dbhelper;
+		this.dbhelper = new SQLHelper(c);
         db = dbhelper.getWritableDatabase();
 	}
 
@@ -65,12 +67,13 @@ public class Utilities {
                 dbhelper.VOTES.UID,
                 dbhelper.VOTES.BID
         };
-        String selection = dbhelper.BIKES.BID + " = " + BID;
+        String selection = dbhelper.BIKES.BID + " = ?";
+        String[] selectionArgs = {Integer.toString(BID)};
         Cursor vcur = db.query(
-                dbhelper.BIKES.TABLE_NAME,
+                dbhelper.VOTES.TABLE_NAME,
                 columns,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -86,7 +89,7 @@ public class Utilities {
         };
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.BIKES.LIKES, vcur.getCount());
-        db.update(dbhelper.BIKES.TABLE_NAME, cvals, selection, null);
+        db.update(dbhelper.BIKES.TABLE_NAME, cvals, selection, selectionArgs);
         vcur.close();
     }
 
@@ -95,13 +98,17 @@ public class Utilities {
         String[] columns = {
                 dbhelper.VOTES.UID
         };
-        String selection = dbhelper.VOTES.UID + " = " + UID
-                + "AND " + dbhelper.VOTES.BID + " = " + BID;
+        String selection = dbhelper.VOTES.UID + " = ? "
+                + "AND " + dbhelper.VOTES.BID + " = ?";
+        String[] selectionArgs = {
+                Integer.toString(UID),
+                Integer.toString(BID)
+        };
         Cursor cur = db.query(
-                dbhelper.BIKES.TABLE_NAME,
+                dbhelper.VOTES.TABLE_NAME,
                 columns,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -146,24 +153,32 @@ public class Utilities {
     }
 
     public boolean authenticate(String username, String passwd) {
-        String hash = hashPasswd(passwd);
+        byte[] hash = hashPasswd(passwd);
         String[] columns = {
                 dbhelper.USERS.USERNAME,
                 dbhelper.USERS.PASSWORD
         };
-        String selection = dbhelper.USERS.USERNAME + " = " + username
-                + "AND " + dbhelper.USERS.PASSWORD + " = " + hash;
+        String selection = dbhelper.USERS.USERNAME + " = ?";
+        String[] selectionArgs = {username};
+
         Cursor cur = db.query(
-                dbhelper.BIKES.TABLE_NAME,
+                dbhelper.USERS.TABLE_NAME,
                 columns,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null
         );
         if (cur.getCount() <= 0) {
             cur.close();
+            Log.d("Auth", "No such username");
+            return false;
+        }
+        cur.moveToFirst();
+        if (!Arrays.equals(cur.getBlob(cur.getColumnIndex(dbhelper.USERS.PASSWORD)), hash)) {
+            cur.close();
+            Log.d("Auth", "Password hashes do not match");
             return false;
         }
         cur.close();
@@ -174,16 +189,15 @@ public class Utilities {
         return true;
     }
 
-    public String hashPasswd(String passwd) {
-        String ret = "";
+    public byte[] hashPasswd(String passwd) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(passwd.getBytes());
-            ret = new String(md.digest());
+            return md.digest();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return ret;
+        return null;
     }
 
     public boolean isAuthenticated() {
@@ -197,7 +211,8 @@ public class Utilities {
         cvals.put(dbhelper.USERS.NAME, name);
         cvals.put(dbhelper.USERS.PHONE, phon);
         cvals.put(dbhelper.USERS.PASSWORD, hashPasswd(passwd));
-        db.insert(dbhelper.USERS.TABLE_NAME, null, cvals);
+        long rowid = db.insert(dbhelper.USERS.TABLE_NAME, null, cvals);
+        Log.d("util/addUser", "Added " + rowid + " users");
     }
 
     public void addBike(int UID, String bname, double lat, double lng, float rate) {
@@ -208,5 +223,28 @@ public class Utilities {
         cvals.put(dbhelper.BIKES.LONG, lng);
         cvals.put(dbhelper.BIKES.RATE, rate);
         db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
+    }
+
+    public int numUsers() {
+        int ret;
+        String[] columns = {
+                dbhelper.USERS.UID
+        };
+        Cursor cur = db.query(
+                dbhelper.USERS.TABLE_NAME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            cur.close();
+            return 0;
+        }
+        ret = cur.getCount();
+        cur.close();
+        return ret;
     }
 }

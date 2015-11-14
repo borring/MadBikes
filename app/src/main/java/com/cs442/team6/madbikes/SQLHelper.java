@@ -53,7 +53,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         + USERS.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + USERS.USERNAME + " TEXT NOT NULL, "
         + USERS.NAME + " TEXT NOT NULL, "
-        + USERS.PASSWORD + " TEXT NOT NULL, "
+        + USERS.PASSWORD + " BLOB NOT NULL, "
         + USERS.PHONE + " INTEGER NOT NULL" + ")";
 
     private static final String DATABASE_CREATE_BIKES = "CREATE TABLE "
