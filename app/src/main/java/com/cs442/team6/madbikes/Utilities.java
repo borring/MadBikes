@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -34,12 +36,12 @@ public class Utilities {
 	public int getPopularity(int BID) {
         int ret;
 
-        String[] selection = {
+        String[] columns = {
                 dbhelper.BIKES.LIKES
         };
         Cursor cur = db.query(
                 dbhelper.BIKES.TABLE_NAME,
-                selection,
+                columns,
                 null,
                 null,
                 null,
@@ -113,6 +115,36 @@ public class Utilities {
         return null;
     }
 
+    public LatLng getLatLng(int BID) {
+        LatLng ret;
+        String[] columns = {
+                dbhelper.BIKES.LAT,
+                dbhelper.BIKES.LONG
+        };
+        String selection = dbhelper.BIKES.BID + " = " + BID;
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                selection,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return null;
+        }
+        if (cur.getCount() <= 0) {
+            return null;
+        }
+        ret = new LatLng(
+                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT)),
+                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT))
+        );
+        cur.close();
+        return ret;
+    }
+
     public boolean authenticate(String username, String passwd) {
         String hash = hashPasswd(passwd);
         String[] columns = {
@@ -168,7 +200,7 @@ public class Utilities {
         db.insert(dbhelper.USERS.TABLE_NAME, null, cvals);
     }
 
-    public void addBike(int UID, String bname, float lat, float lng, float rate) {
+    public void addBike(int UID, String bname, double lat, double lng, float rate) {
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.BIKES.UID, UID);
         cvals.put(dbhelper.BIKES.NAME, bname);

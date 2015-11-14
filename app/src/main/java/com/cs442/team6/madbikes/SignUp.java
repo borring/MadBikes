@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by SHE on 2015/11/1.
@@ -24,6 +25,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             et_phone.setInputType(InputType.TYPE_CLASS_PHONE);
             EditText et_email = (EditText) findViewById(R.id.email);
             et_email.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+            EditText et_name = (EditText) findViewById(R.id.Name);
+            et_name.setInputType(InputType.TYPE_CLASS_TEXT);
+            EditText et_address = (EditText) findViewById(R.id.user_address);
+            et_address.setInputType(InputType.TYPE_CLASS_TEXT);
+            EditText et_password = (EditText) findViewById(R.id.sign_up_pass);
+            et_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            EditText et_confirm_password = (EditText) findViewById(R.id.confirm_pass);
+            et_confirm_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            if(et_password != et_confirm_password)
+                Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();
+
+
                 Intent intent = new Intent(SignUp.this, SignIn.class);
                 this.startActivity(intent);
             break;
