@@ -18,10 +18,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -151,21 +153,35 @@ public class MapsActivity extends ActionBarActivity implements
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title("I am here!");
-        mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.addMarker(options);
 
-        double currentLatitude1 = 35.6833;
-        double currentLongitude1 = 139.6833;
-        LatLng latLng1 = new LatLng(currentLatitude1, currentLongitude1);
+        //testing with arrays for adding bikes --ARJUN 14 Nov
+
+        double [] Bike_Latitude;
+        Bike_Latitude = new double[10];
+        double [] Bike_Longitude;
+        Bike_Longitude = new double[10];
+        Bike_Latitude[0] = 41.832620;
+        Bike_Longitude[0] = -87.615028;
+        Bike_Latitude[1]= 41.837289;
+        Bike_Longitude[1] = -87.623354;
+        LatLng [] latLng2;
+        latLng2 = new LatLng[10];
+        for (int i=0; i<2 ; i++){
+            latLng2[i]= new LatLng(Bike_Latitude[i], Bike_Longitude[i]);
+            MarkerOptions options2 = new MarkerOptions()
+                    .position(latLng2[i])
+                    .title("Bike")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.b1));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+            mMap.addMarker(options2);
+        }
 
 
-        MarkerOptions options1 = new MarkerOptions()
-                .position(latLng1)
-                .title("Bike1!")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.b1));
-        mMap.addMarker(options1);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
-
+        //end of segment
     }
     @Override
     public void onConnectionSuspended(int i) {
