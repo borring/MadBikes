@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    Utilities util;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,33 +37,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button signup=(Button)findViewById(R.id.sign_up_button);
         signin.setOnClickListener(this);
         signup.setOnClickListener(this);
+
+        DummyData dum = new DummyData(this);
+        dum.fill();
+        util = new Utilities(this);
     }
 
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.sign_up_button:
-                    //  if (username.equals("cshe") && password.equals("123")) {
-                    Intent intent = new Intent(MainActivity.this, SignUp.class);
-                    this.startActivity(intent);
-                    //  } else {
-                    //  Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
-                    //  }
-                    break;
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_up_button:
+                //  if (username.equals("cshe") && password.equals("123")) {
+                Intent intent = new Intent(MainActivity.this, SignUp.class);
+                this.startActivity(intent);
+                //  } else {
+                //  Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
+                //  }
+                break;
 
-                case R.id.sign_in_button:
-                    EditText user = (EditText) findViewById(R.id.username);
-                    EditText pass = (EditText) findViewById(R.id.password);
-                    String username = user.getText().toString().trim();
-                    String password = pass.getText().toString().trim();
-                    if (username.equals("cshe") && password.equals("123")) {
-                        Intent signin_intent = new Intent(MainActivity.this, MapsActivity.class);
-                        this.startActivity(signin_intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
-                    }
-            }
+            case R.id.sign_in_button:
+                EditText user = (EditText) findViewById(R.id.username);
+                EditText pass = (EditText) findViewById(R.id.password);
+                String username = user.getText().toString().trim();
+                String password = pass.getText().toString().trim();
+                if (util.authenticate(username, password)) {
+                    Intent signin_intent = new Intent(MainActivity.this, MapsActivity.class);
+                    this.startActivity(signin_intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
+                }
+        }
 
-        }}
+    }
+}
 
  //   @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
