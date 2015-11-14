@@ -215,13 +215,16 @@ public class Utilities {
         Log.d("util/addUser", "Added " + rowid + " users");
     }
 
-    public void addBike(int UID, String bname, double lat, double lng, float rate) {
+    public void addBike(int UID, String bname, double lat, double lng, String state, float rate) {
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.BIKES.UID, UID);
         cvals.put(dbhelper.BIKES.NAME, bname);
         cvals.put(dbhelper.BIKES.LAT, lat);
         cvals.put(dbhelper.BIKES.LONG, lng);
         cvals.put(dbhelper.BIKES.RATE, rate);
+        cvals.put(dbhelper.BIKES.ISAVAILABLE, 1);
+        cvals.put(dbhelper.BIKES.ADDRESS, "N/A");
+        cvals.put(dbhelper.BIKES.CONDITION, state);
         db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
     }
 
