@@ -23,6 +23,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         public static final String TABLE_NAME = "Bikes";
         public static final String BID = "_id";
         public static final String UID = "UID";
+        public static final String NAME = "Make";
         public static final String ADDRESS = "Address";
         public static final String LAT = "Latitude";
         public static final String LONG = "Longitude";
@@ -59,12 +60,13 @@ public class SQLHelper extends SQLiteOpenHelper {
         + BIKES.TABLE_NAME + " ("
         + BIKES.BID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + BIKES.UID + " INTEGER, "
-        + BIKES.ADDRESS + " TEXT NOT NULL, "
+        + BIKES.NAME + " TEXT, "
+        + BIKES.ADDRESS + " TEXT, "
         + BIKES.LAT + " REAL, "
         + BIKES.LONG + " REAL, "
         + BIKES.ISAVAILABLE + " INTEGER, "
         + BIKES.RATE + " REAL,"
-        + BIKES.IMAGE_KEY + " BLOB, "
+        + BIKES.IMAGE_KEY + " TEXT, "
         + BIKES.CONDITION + " TEXT, "
         + BIKES.LIKES + " INTEGER, "
         + "FOREIGN KEY (" + BIKES.UID + ") REFERENCES " + USERS.TABLE_NAME + "(" + USERS.UID + ")" +")";
