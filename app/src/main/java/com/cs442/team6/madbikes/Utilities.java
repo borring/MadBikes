@@ -158,4 +158,23 @@ public class Utilities {
         SharedPreferences pref = c.getSharedPreferences(AUTH_FILE, Context.MODE_PRIVATE);
         return pref.getBoolean(AUTH_FLAG, false);
     }
+
+    public void addUser(String uname, String name, String phon, String passwd) {
+        ContentValues cvals = new ContentValues();
+        cvals.put(dbhelper.USERS.USERNAME, uname);
+        cvals.put(dbhelper.USERS.NAME, name);
+        cvals.put(dbhelper.USERS.PHONE, phon);
+        cvals.put(dbhelper.USERS.PASSWORD, hashPasswd(passwd));
+        db.insert(dbhelper.USERS.TABLE_NAME, null, cvals);
+    }
+
+    public void addBike(int UID, String bname, float lat, float lng, float rate) {
+        ContentValues cvals = new ContentValues();
+        cvals.put(dbhelper.BIKES.UID, UID);
+        cvals.put(dbhelper.BIKES.NAME, bname);
+        cvals.put(dbhelper.BIKES.LAT, lat);
+        cvals.put(dbhelper.BIKES.LONG, lng);
+        cvals.put(dbhelper.BIKES.RATE, rate);
+        db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
+    }
 }
