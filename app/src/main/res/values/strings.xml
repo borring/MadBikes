@@ -17,4 +17,6 @@
     <string name="title_activity_manage_profile">ManageProfile</string>
     <string name="title_activity_add_new">AddNew</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_detail_bike">Detail_bike</string>
+    <string name="title_activity_bikes_detail">BikesDetail</string>
 </resources>
