@@ -25,11 +25,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 public class MapsActivity extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private GoogleApiClient mGoogleApiClient;
@@ -145,6 +147,7 @@ public class MapsActivity extends ActionBarActivity implements
     }
 
     private void handleNewLocation(Location location) {
+        mMap.setOnMarkerClickListener(this);
         Log.d(TAG, location.toString());
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
@@ -178,10 +181,19 @@ public class MapsActivity extends ActionBarActivity implements
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
             mMap.addMarker(options2);
+
+
         }
 
 
         //end of segment
+    }
+
+    public boolean onMarkerClick(Marker marker) {
+        Log.i("GoogleMapActivity", "onMarkerClick");
+        Intent signin_intent = new Intent(this, BikesDetail.class);
+        this.startActivity(signin_intent);
+        return false;
     }
     @Override
     public void onConnectionSuspended(int i) {
