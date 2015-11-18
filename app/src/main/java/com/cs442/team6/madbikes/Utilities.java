@@ -250,4 +250,30 @@ public class Utilities {
         cur.close();
         return ret;
     }
+
+    public int getUID(String uname) {
+        int ret;
+        String[] columns = {
+                dbhelper.USERS.UID,
+                dbhelper.USERS.USERNAME
+        };
+        String where = dbhelper.USERS.USERNAME + " = ?";
+        String[] whereArgs = {uname};
+        Cursor cur = db.query(
+                dbhelper.USERS.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            cur.close();
+            return -1;
+        }
+        ret = cur.getInt(cur.getColumnIndex(dbhelper.USERS.UID));
+        cur.close();
+        return ret;
+    }
 }
