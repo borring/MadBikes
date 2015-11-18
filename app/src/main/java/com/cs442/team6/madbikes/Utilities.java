@@ -272,6 +272,7 @@ public class Utilities {
             cur.close();
             return -1;
         }
+        cur.moveToFirst();
         ret = cur.getInt(cur.getColumnIndex(dbhelper.USERS.UID));
         cur.close();
         return ret;
@@ -298,6 +299,7 @@ public class Utilities {
             cur.close();
             return null;
         }
+        cur.moveToFirst();
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.USERNAME));
         cur.close();
         return ret;
@@ -324,6 +326,7 @@ public class Utilities {
             cur.close();
             return null;
         }
+        cur.moveToFirst();
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.NAME));
         cur.close();
         return ret;
@@ -350,6 +353,7 @@ public class Utilities {
             cur.close();
             return null;
         }
+        cur.moveToFirst();
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.PHONE));
         cur.close();
         return ret;
