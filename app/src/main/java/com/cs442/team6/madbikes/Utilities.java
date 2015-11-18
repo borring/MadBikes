@@ -276,4 +276,82 @@ public class Utilities {
         cur.close();
         return ret;
     }
+
+    public String getUsername(int UID) {
+        String ret;
+        String[] columns = {
+                dbhelper.USERS.UID,
+                dbhelper.USERS.USERNAME
+        };
+        String where = dbhelper.USERS.UID + " = ?";
+        String[] whereArgs = {Integer.toString(UID)};
+        Cursor cur = db.query(
+                dbhelper.USERS.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            cur.close();
+            return null;
+        }
+        ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.USERNAME));
+        cur.close();
+        return ret;
+    }
+
+    public String getName(int UID) {
+        String ret;
+        String[] columns = {
+                dbhelper.USERS.UID,
+                dbhelper.USERS.NAME
+        };
+        String where = dbhelper.USERS.UID + " = ?";
+        String[] whereArgs = {Integer.toString(UID)};
+        Cursor cur = db.query(
+                dbhelper.USERS.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            cur.close();
+            return null;
+        }
+        ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.NAME));
+        cur.close();
+        return ret;
+    }
+
+    public String getPhone(int UID) {
+        String ret;
+        String[] columns = {
+                dbhelper.USERS.UID,
+                dbhelper.USERS.PHONE
+        };
+        String where = dbhelper.USERS.UID + " = ?";
+        String[] whereArgs = {Integer.toString(UID)};
+        Cursor cur = db.query(
+                dbhelper.USERS.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            cur.close();
+            return null;
+        }
+        ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.PHONE));
+        cur.close();
+        return ret;
+    }
 }
