@@ -54,7 +54,7 @@ public class SQLHelper extends SQLiteOpenHelper {
         + USERS.USERNAME + " TEXT NOT NULL, "
         + USERS.NAME + " TEXT NOT NULL, "
         + USERS.PASSWORD + " BLOB NOT NULL, "
-        + USERS.PHONE + " INTEGER NOT NULL" + ")";
+        + USERS.PHONE + " TEXT NOT NULL" + ")";
 
     private static final String DATABASE_CREATE_BIKES = "CREATE TABLE "
         + BIKES.TABLE_NAME + " ("
