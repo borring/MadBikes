@@ -10,29 +10,121 @@
     tools:showIn="@layout/activity_bikes_detail"
     tools:context="com.cs442.team6.madbikes.BikesDetail">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bike Details: "/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/bike"
+            android:layout_alignParentLeft="true"/>
 
-        <EditText
+        <TextView
+            android:id="@+id/bname"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:text="ALLEZ or some thing"
+            android:textSize="33dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bike Details: "/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Owner Details: "/>
-        />
-        <EditText
+            android:layout_marginTop="15dp"
+            android:text="Available:"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/bname"/>
+        <TextView
+            android:id="@+id/bavailable"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="No"
+            android:textSize="25dp"
+            android:textColor="#ff0033"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bname"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bike Details: "/>
-    </LinearLayout>
+            android:layout_marginTop="15dp"
+            android:text="Rate:"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/bavailable"/>
+        <TextView
+            android:id="@+id/brate"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="$4.00/hr"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bavailable"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Condition:"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/brate"/>
+        <TextView
+            android:id="@+id/bcondition"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="N/A"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/brate"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="location:"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/bcondition"/>
+        <TextView
+            android:id="@+id/blocation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="lat 41.83831\nLng -87.627371)"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bcondition"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Address:"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/blocation"/>
+        <TextView
+            android:id="@+id/baddress"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="N/A"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/blocation"/>
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
