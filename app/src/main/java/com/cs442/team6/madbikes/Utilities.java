@@ -22,6 +22,7 @@ public class Utilities {
 	Context c;
 	SQLiteDatabase db;
     SQLHelper dbhelper;
+    boolean closed = false;
 
     // Sharedpref AUTH flag
     String AUTH_FILE = "auth";
@@ -36,6 +37,9 @@ public class Utilities {
    // public int insertDb()
 
 	public int getPopularity(int BID) {
+        if (closed) {
+            return -1;
+        }
         int ret;
 
         String[] columns = {
@@ -63,6 +67,9 @@ public class Utilities {
 	}
 
     public void updatePopularity(int BID) {
+        if (closed) {
+            return;
+        }
         String[] columns = {
                 dbhelper.VOTES.UID,
                 dbhelper.VOTES.BID
@@ -94,6 +101,9 @@ public class Utilities {
     }
 
     public boolean hasVoted(int UID, int BID) {
+        if (closed) {
+            return true;
+        }
         boolean ret;
         String[] columns = {
                 dbhelper.VOTES.UID
@@ -123,6 +133,9 @@ public class Utilities {
     }
 
     public LatLng getLatLng(int BID) {
+        if (closed) {
+            return null;
+        }
         LatLng ret;
         String[] columns = {
                 dbhelper.BIKES.LAT,
@@ -153,6 +166,9 @@ public class Utilities {
     }
 
     public boolean authenticate(String username, String passwd) {
+        if (closed) {
+            return false;
+        }
         byte[] hash = hashPasswd(passwd);
         String[] columns = {
                 dbhelper.USERS.USERNAME,
@@ -206,6 +222,9 @@ public class Utilities {
     }
 
     public void addUser(String uname, String name, String phon, String passwd) {
+        if (closed) {
+            Log.d("util/addUser", "db closed. Cannot add user");
+        }
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.USERS.USERNAME, uname);
         cvals.put(dbhelper.USERS.NAME, name);
@@ -216,6 +235,9 @@ public class Utilities {
     }
 
     public void addBike(int UID, String bname, double lat, double lng, String state, float rate) {
+        if (closed) {
+            Log.d("util/addBike", "db closed. Cannot add bike");
+        }
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.BIKES.UID, UID);
         cvals.put(dbhelper.BIKES.NAME, bname);
@@ -229,6 +251,10 @@ public class Utilities {
     }
 
     public int numUsers() {
+        if (closed) {
+            Log.d("util/numUsers", "db closed. Cannot get numUsers");
+            return -1;
+        }
         int ret;
         String[] columns = {
                 dbhelper.USERS.UID
@@ -244,7 +270,7 @@ public class Utilities {
         );
         if (cur == null) {
             cur.close();
-            return 0;
+            return -1;
         }
         ret = cur.getCount();
         cur.close();
@@ -252,6 +278,10 @@ public class Utilities {
     }
 
     public int getUID(String uname) {
+        if (closed) {
+            Log.d("util/getUID", "db closed. Cannot get UID");
+            return -1;
+        }
         int ret;
         String[] columns = {
                 dbhelper.USERS.UID,
@@ -279,6 +309,10 @@ public class Utilities {
     }
 
     public String getUsername(int UID) {
+        if (closed) {
+            Log.d("util/getUsername", "db closed. Cannot get Username");
+            return null;
+        }
         String ret;
         String[] columns = {
                 dbhelper.USERS.UID,
@@ -306,6 +340,10 @@ public class Utilities {
     }
 
     public String getName(int UID) {
+        if (closed) {
+            Log.d("util/getName", "db closed. Cannot get Name");
+            return null;
+        }
         String ret;
         String[] columns = {
                 dbhelper.USERS.UID,
@@ -333,6 +371,10 @@ public class Utilities {
     }
 
     public String getPhone(int UID) {
+        if (closed) {
+            Log.d("util/getPhone", "db closed. Cannot get Phone Number");
+            return null;
+        }
         String ret;
         String[] columns = {
                 dbhelper.USERS.UID,
@@ -357,5 +399,10 @@ public class Utilities {
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.PHONE));
         cur.close();
         return ret;
+    }
+
+    public void close() {
+        db.close();
+        closed = true;
     }
 }
