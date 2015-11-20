@@ -132,39 +132,6 @@ public class Utilities {
         return null;
     }
 
-    public LatLng getLatLng(int BID) {
-        if (closed) {
-            return null;
-        }
-        LatLng ret;
-        String[] columns = {
-                dbhelper.BIKES.LAT,
-                dbhelper.BIKES.LONG
-        };
-        String selection = dbhelper.BIKES.BID + " = " + BID;
-        Cursor cur = db.query(
-                dbhelper.BIKES.TABLE_NAME,
-                columns,
-                selection,
-                null,
-                null,
-                null,
-                null
-        );
-        if (cur == null) {
-            return null;
-        }
-        if (cur.getCount() <= 0) {
-            return null;
-        }
-        ret = new LatLng(
-                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT)),
-                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT))
-        );
-        cur.close();
-        return ret;
-    }
-
     public boolean authenticate(String username, String passwd) {
         if (closed) {
             return false;
@@ -453,6 +420,40 @@ public class Utilities {
             return null;
         }
         String ret = cur.getString(cur.getColumnIndex(dbhelper.BIKES.NAME));
+        cur.close();
+        return ret;
+    }
+
+    public LatLng getBikeLatLng(int BID) {
+        if (closed) {
+            return null;
+        }
+        LatLng ret;
+        String[] columns = {
+                dbhelper.BIKES.LAT,
+                dbhelper.BIKES.LONG
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return null;
+        }
+        if (cur.getCount() <= 0) {
+            return null;
+        }
+        ret = new LatLng(
+                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT)),
+                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT))
+        );
         cur.close();
         return ret;
     }
