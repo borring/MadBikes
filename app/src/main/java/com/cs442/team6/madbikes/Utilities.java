@@ -401,6 +401,32 @@ public class Utilities {
         return ret;
     }
 
+    public Cursor getBikeCur() {
+        if (closed) {
+            return null;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.NAME,
+                dbhelper.BIKES.ISAVAILABLE,
+                dbhelper.BIKES.RATE,
+                dbhelper.BIKES.LIKES,
+                dbhelper.BIKES.IMAGE_KEY,
+                dbhelper.BIKES.LAT,
+                dbhelper.BIKES.LONG
+        };
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        return cur;
+    }
+
     public void close() {
         db.close();
         closed = true;
