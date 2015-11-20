@@ -201,6 +201,21 @@ public class Utilities {
         Log.d("util/addUser", "Added " + rowid + " users");
     }
 
+    public void updateUser(int UID, String name, String phon, String passwd) {
+        if (closed) {
+            Log.d("util/addUser", "db closed. Cannot add user");
+        }
+        String where = dbhelper.USERS.UID + " = ?";
+        String[] whereArgs = {Integer.toString(UID)};
+
+        ContentValues cvals = new ContentValues();
+        cvals.put(dbhelper.USERS.NAME, name);
+        cvals.put(dbhelper.USERS.PHONE, phon);
+        cvals.put(dbhelper.USERS.PASSWORD, hashPasswd(passwd));
+        long rowid = db.update(dbhelper.USERS.TABLE_NAME, cvals, where, whereArgs);
+        Log.d("util/updateUser", "Updated user " + UID);
+    }
+
     public void addBike(int UID, String bname, double lat, double lng, String state, float rate) {
         if (closed) {
             Log.d("util/addBike", "db closed. Cannot add bike");
@@ -215,6 +230,23 @@ public class Utilities {
         cvals.put(dbhelper.BIKES.ADDRESS, "N/A");
         cvals.put(dbhelper.BIKES.CONDITION, state);
         db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
+    }
+
+    public void updateBike(int BID, String bname, double lat, double lng, String state, float rate) {
+        if (closed) {
+            Log.d("util/addBike", "db closed. Cannot add bike");
+        }
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+
+        ContentValues cvals = new ContentValues();
+        cvals.put(dbhelper.BIKES.NAME, bname);
+        cvals.put(dbhelper.BIKES.LAT, lat);
+        cvals.put(dbhelper.BIKES.LONG, lng);
+        cvals.put(dbhelper.BIKES.RATE, rate);
+        cvals.put(dbhelper.BIKES.ISAVAILABLE, 1);
+        cvals.put(dbhelper.BIKES.CONDITION, state);
+        db.update(dbhelper.BIKES.TABLE_NAME, cvals, where, whereArgs);
     }
 
     public int numUsers() {
