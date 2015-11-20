@@ -194,6 +194,7 @@ public class MapsActivity extends ActionBarActivity implements
     public boolean onMarkerClick(Marker marker) {
         Log.i("GoogleMapActivity", "onMarkerClick");
         Intent signin_intent = new Intent(this, BikesDetail.class);
+        signin_intent.putExtra(BikesDetail.BID_KEY, Integer.parseInt(marker.getSnippet()));
         this.startActivity(signin_intent);
         return false;
     }
