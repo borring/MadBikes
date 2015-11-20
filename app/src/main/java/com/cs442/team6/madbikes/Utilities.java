@@ -427,6 +427,126 @@ public class Utilities {
         return cur;
     }
 
+    public String getBikeName(int BID) {
+        if (closed) {
+            return null;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.NAME
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return null;
+        }
+        if (cur.getCount() <= 0) {
+            return null;
+        }
+        String ret = cur.getString(cur.getColumnIndex(dbhelper.BIKES.NAME));
+        cur.close();
+        return ret;
+    }
+
+    public String getBikeCondition(int BID) {
+        if (closed) {
+            return null;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.CONDITION
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return null;
+        }
+        if (cur.getCount() <= 0) {
+            return null;
+        }
+        String ret = cur.getString(cur.getColumnIndex(dbhelper.BIKES.CONDITION));
+        cur.close();
+        return ret;
+    }
+
+    public float getBikeRate(int BID) {
+        if (closed) {
+            return -1;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.RATE
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return -1;
+        }
+        if (cur.getCount() <= 0) {
+            return -1;
+        }
+        float ret = cur.getFloat(cur.getColumnIndex(dbhelper.BIKES.RATE));
+        cur.close();
+        return ret;
+    }
+
+    public boolean getBikeAvail(int BID) {
+        if (closed) {
+            return false;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.ISAVAILABLE
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return false;
+        }
+        if (cur.getCount() <= 0) {
+            return false;
+        }
+        int ret = cur.getInt(cur.getColumnIndex(dbhelper.BIKES.ISAVAILABLE));
+        cur.close();
+        return ret == 1;
+    }
+
     public void close() {
         db.close();
         closed = true;
