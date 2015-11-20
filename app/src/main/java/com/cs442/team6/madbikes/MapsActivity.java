@@ -131,7 +131,7 @@ public class MapsActivity extends ActionBarActivity implements
      */
     private void setUpMap() {
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-
+        refreshMap();
     }
 
     @Override
@@ -160,33 +160,35 @@ public class MapsActivity extends ActionBarActivity implements
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         mMap.addMarker(options);
 
-        //testing with arrays for adding bikes --ARJUN 14 Nov
-
-        double [] Bike_Latitude;
-        Bike_Latitude = new double[10];
-        double [] Bike_Longitude;
-        Bike_Longitude = new double[10];
-        Bike_Latitude[0] = 41.832620;
-        Bike_Longitude[0] = -87.615028;
-        Bike_Latitude[1]= 41.837289;
-        Bike_Longitude[1] = -87.623354;
-        LatLng [] latLng2;
-        latLng2 = new LatLng[10];
-        for (int i=0; i<2 ; i++){
-            latLng2[i]= new LatLng(Bike_Latitude[i], Bike_Longitude[i]);
-            MarkerOptions options2 = new MarkerOptions()
-                    .position(latLng2[i])
-                    .title("Bike")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.b1));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-            mMap.addMarker(options2);
-
-
-        }
-
 
         //end of segment
+    }
+
+    public void refreshMap() {
+
+        mMap.clear();
+
+        Utilities util = new Utilities(this);
+        int[] blist = util.getBikeList();
+        Log.d("util/getBikeList", String.format("There are %d bikes in blist", blist.length));
+
+        for (int i = 0; i < blist.length; i++) {
+            util.getBikeLatLng(blist[i]);
+            Log.d(
+                    "util/getBikeList",
+                    String.format("Mapping bike (%d) at coordinates: %s", blist[i], util.getBikeLatLng(blist[i]).toString())
+                    );
+            MarkerOptions options2 = new MarkerOptions()
+                    .position(util.getBikeLatLng(blist[i]))
+                    .title(util.getBikeName(blist[i]))
+                    .snippet(Integer.toString(blist[i]))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.b1));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(util.getBikeLatLng(blist[i])));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+            mMap.addMarker(options2);
+        }
+
+        util.close();
     }
 
     public boolean onMarkerClick(Marker marker) {
