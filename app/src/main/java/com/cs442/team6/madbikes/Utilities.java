@@ -451,6 +451,7 @@ public class Utilities {
         if (cur.getCount() <= 0) {
             return null;
         }
+        cur.moveToFirst();
         String ret = cur.getString(cur.getColumnIndex(dbhelper.BIKES.NAME));
         cur.close();
         return ret;
@@ -482,6 +483,7 @@ public class Utilities {
         if (cur.getCount() <= 0) {
             return null;
         }
+        cur.moveToFirst();
         ret = new LatLng(
                 cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT)),
                 cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT))
@@ -515,6 +517,7 @@ public class Utilities {
         if (cur.getCount() <= 0) {
             return null;
         }
+        cur.moveToFirst();
         String ret = cur.getString(cur.getColumnIndex(dbhelper.BIKES.CONDITION));
         cur.close();
         return ret;
@@ -545,6 +548,7 @@ public class Utilities {
         if (cur.getCount() <= 0) {
             return -1;
         }
+        cur.moveToFirst();
         float ret = cur.getFloat(cur.getColumnIndex(dbhelper.BIKES.RATE));
         cur.close();
         return ret;
@@ -575,6 +579,7 @@ public class Utilities {
         if (cur.getCount() <= 0) {
             return false;
         }
+        cur.moveToFirst();
         int ret = cur.getInt(cur.getColumnIndex(dbhelper.BIKES.ISAVAILABLE));
         cur.close();
         return ret == 1;
