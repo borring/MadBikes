@@ -13,12 +13,17 @@ import android.view.View;
 
 public class BikesDetail extends AppCompatActivity {
 
+    static final String BID_KEY = "BID";
+    int BID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bikes_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Intent intent = getIntent();
+        BID = intent.getIntExtra(BID_KEY, -1);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
