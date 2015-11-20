@@ -413,6 +413,7 @@ public class Utilities {
         if (cur == null) {
             return null;
         }
+        Log.d("util/getBikeList", String.format("There are %d bikes in db", cur.getCount()));
         if (cur.getCount() <= 0) {
             cur.close();
             return null;
@@ -421,6 +422,8 @@ public class Utilities {
         cur.moveToFirst();
         for (int i = 0; i < cur.getCount(); i++) {
             ret[i] = cur.getInt(cur.getColumnIndex(dbhelper.BIKES.BID));
+            Log.d("util/getBikeList", "adding bike to int[]");
+            cur.moveToNext();
         }
         cur.close();
         return ret;
@@ -486,7 +489,7 @@ public class Utilities {
         cur.moveToFirst();
         ret = new LatLng(
                 cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT)),
-                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LAT))
+                cur.getDouble(cur.getColumnIndex(dbhelper.BIKES.LONG))
         );
         cur.close();
         return ret;
