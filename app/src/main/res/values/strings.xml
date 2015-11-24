@@ -19,4 +19,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_detail_bike">Detail_bike</string>
     <string name="title_activity_bikes_detail">BikesDetail</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_list_of_bike">ListOfBike</string>
 </resources>

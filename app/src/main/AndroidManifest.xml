@@ -85,6 +85,11 @@
             android:label="@string/title_activity_bikes_detail"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".ListOfBike"
+            android:label="@string/title_activity_list_of_bike"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

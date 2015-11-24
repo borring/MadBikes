@@ -4,10 +4,14 @@
     <!--item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" /-->
 
-    <item android:id="@+id/mp"
-        android:title="Manage Profile"
+    <item android:id="@+id/list"
+        android:title="List of Bikes"
         android:orderInCategory="100"
         />
+    <item android:id="@+id/mp"
+    android:title="Manage Profile"
+    android:orderInCategory="100"
+    />
     <item android:id="@+id/logout"
         android:title="LogOut"
         android:orderInCategory="100"
