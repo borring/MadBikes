@@ -16,6 +16,17 @@ import android.widget.Toast;
  */
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signup);
+        Button submit= (Button)findViewById(R.id.submit);
+        Button cancel= (Button)findViewById(R.id.cancel);
+        submit.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -33,12 +44,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             et_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             EditText et_confirm_password = (EditText) findViewById(R.id.confirm_pass);
             et_confirm_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            if(et_password != et_confirm_password)
-                Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();
-
-
-                Intent intent = new Intent(SignUp.this, SignIn.class);
-                this.startActivity(intent);
+            if(!et_password.toString().equals(et_confirm_password.toString())){
+                Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();}
+            if(et_phone.toString().length()!=10){
+                Toast.makeText(SignUp.this,"WRONG PHONE NUMBER FORMAT", Toast.LENGTH_LONG).show();
+            }
+            else{
+                new Utilities(this).addUser(et_email.toString(),et_name.toString(),et_phone.toString(),et_password.toString());
+                Intent intent = new Intent(SignUp.this, MapsActivity.class);
+                this.startActivity(intent);}
             break;
         case R.id.cancel:
             Intent intent1 = new Intent(SignUp.this, MainActivity.class);
@@ -46,16 +60,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
-        Button submit= (Button)findViewById(R.id.submit);
-        Button cancel= (Button)findViewById(R.id.cancel);
-        submit.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-
-    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

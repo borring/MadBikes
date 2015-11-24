@@ -47,8 +47,11 @@ public class SignIn extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.mp) {
           startActivity(new Intent(SignIn.this, ManageProfile.class));
-            return true;
-        } else {
+            return true;}
+//        } else if(id ==R.id.list){
+//           // startActivity(new Intent(this, ItemDetailActivity.class));
+//        }
+        else{
             NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);

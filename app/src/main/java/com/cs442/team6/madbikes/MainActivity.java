@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_up_button:
-                //  if (username.equals("cshe") && password.equals("123")) {
                 Intent intent = new Intent(MainActivity.this, SignUp.class);
                 this.startActivity(intent);
                 //  } else {

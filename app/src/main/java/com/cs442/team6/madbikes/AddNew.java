@@ -35,6 +35,7 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
             String condition1 = condition.getText().toString().trim();
             String price1 = price.getText().toString().trim();
             if(!brand1.equals("")&&!address1.equals("")&&!condition1.equals("")&&!price1.equals("")){
+
                  startActivity(new Intent(AddNew.this, ManageProfile.class));}
             else{
                  Toast.makeText(getApplicationContext(), "No enough information", Toast.LENGTH_LONG).show();
