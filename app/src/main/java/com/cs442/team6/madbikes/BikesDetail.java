@@ -1,7 +1,9 @@
 package com.cs442.team6.madbikes;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,11 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class BikesDetail extends AppCompatActivity {
+public class BikesDetail extends AppCompatActivity implements View.OnClickListener{
 
     static final String BID_KEY = "BID";
     int BID;
@@ -24,6 +27,12 @@ public class BikesDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bikes_detail);
+        /*traverse to another app on clicking button*/
+        Button b1=(Button)findViewById(R.id.button);
+        b1.setOnClickListener(this);
+        Button b2=(Button)findViewById(R.id.button2);
+        b2.setOnClickListener(this);
+        /*end of segment*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
@@ -76,4 +85,21 @@ public class BikesDetail extends AppCompatActivity {
         );
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button:
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "bike rental");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(emailIntent, "i would like to rent ur bike."));
+                break;
+            case R.id.button2:
+                Uri uri = Uri.parse("smsto:");
+                Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+                it.putExtra("sms_body", "I would Like to rent ur bike");
+                startActivity(it);
+        }
+        }
 }
