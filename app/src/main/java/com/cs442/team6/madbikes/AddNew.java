@@ -1,17 +1,27 @@
 package com.cs442.team6.madbikes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.nio.FloatBuffer;
+import java.util.List;
+
 public class AddNew extends AppCompatActivity implements View.OnClickListener{
+
+    public Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +45,24 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
             String condition1 = condition.getText().toString().trim();
             String price1 = price.getText().toString().trim();
             if(!brand1.equals("")&&!address1.equals("")&&!condition1.equals("")&&!price1.equals("")){
+                Utilities newBike = new Utilities(getApplicationContext());
+              //  public void addBike(int UID, String bname, double lat, double lng, String state, float rate)
+                Geocoder geocoder = new Geocoder(AddNew.this);
+                List<Address> addresses= null;
+                Address addressL= null;
+                try {
+                    addresses= geocoder.getFromLocationName(address1, 1);
+                } catch (IOException e) {
+                    Log.e("AddrToGp", e.toString());
+                }
 
-                 startActivity(new Intent(AddNew.this, ManageProfile.class));}
+                addressL= addresses.get(0);
+                double geoLatitude = addressL.getLatitude()*1000000;
+                double geoLongitude = addressL.getLongitude()*1000000;
+                MainActivity main= new MainActivity();
+                newBike.addBike(main.getUID(main.getUsername()), brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
+
+                startActivity(new Intent(AddNew.this, ManageProfile.class));}
             else{
                  Toast.makeText(getApplicationContext(), "No enough information", Toast.LENGTH_LONG).show();
             }
