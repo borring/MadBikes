@@ -409,6 +409,7 @@ public class Utilities {
                 dbhelper.BIKES.NAME,
                 dbhelper.BIKES.ISAVAILABLE,
                 dbhelper.BIKES.RATE,
+                dbhelper.BIKES.CONDITION,
                 dbhelper.BIKES.LIKES,
                 dbhelper.BIKES.IMAGE_KEY,
                 dbhelper.BIKES.LAT,
