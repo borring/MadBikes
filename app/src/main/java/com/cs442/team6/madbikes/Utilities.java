@@ -462,6 +462,37 @@ public class Utilities {
         return ret;
     }
 
+    public int getBikeUID(int BID) {
+        if (closed) {
+            return -1;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.UID
+        };
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+        if (cur == null) {
+            return -1;
+        }
+        if (cur.getCount() <= 0) {
+            return -1;
+        }
+        cur.moveToFirst();
+        int ret = cur.getInt(cur.getColumnIndex(dbhelper.BIKES.UID));
+        cur.close();
+        return ret;
+    }
+
     public String getBikeName(int BID) {
         if (closed) {
             return null;
