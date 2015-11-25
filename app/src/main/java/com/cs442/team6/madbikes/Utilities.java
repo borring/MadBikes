@@ -188,6 +188,14 @@ public class Utilities {
         return pref.getBoolean(AUTH_FLAG, false);
     }
 
+    //check if the username hase existed
+    public boolean isExisted(String username){
+        if(getUID(username)==-1){
+            return false;
+        }else
+            return true;
+    }
+
     public void addUser(String uname, String name, String phon, String passwd) {
         if (closed) {
             Log.d("util/addUser", "db closed. Cannot add user");
@@ -216,7 +224,7 @@ public class Utilities {
         Log.d("util/updateUser", "Updated user " + UID);
     }
 
-    public void addBike(int UID, String bname, double lat, double lng, String state, float rate) {
+    public void addBike(int UID, String bname, String address, double lat, double lng, String state, float rate) {
         if (closed) {
             Log.d("util/addBike", "db closed. Cannot add bike");
         }
@@ -227,7 +235,7 @@ public class Utilities {
         cvals.put(dbhelper.BIKES.LONG, lng);
         cvals.put(dbhelper.BIKES.RATE, rate);
         cvals.put(dbhelper.BIKES.ISAVAILABLE, 1);
-        cvals.put(dbhelper.BIKES.ADDRESS, "N/A");
+        cvals.put(dbhelper.BIKES.ADDRESS,address);
         cvals.put(dbhelper.BIKES.CONDITION, state);
         db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
     }
