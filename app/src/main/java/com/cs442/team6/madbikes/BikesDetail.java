@@ -87,16 +87,25 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        /*
+        start
+         */
+        Utilities util = new Utilities(this);
+        int uid = util.getBikeUID(BID);
+        String phonenumber = util.getPhone(uid);
+        String mailid = util.getUsername(uid);
+
+        /*end*/
         switch (v.getId()) {
             case R.id.button:
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", "@gmail.com", null));
+                        "mailto",mailid, null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "bike rental");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(emailIntent, "i would like to rent ur bike."));
                 break;
             case R.id.button2:
-                Uri uri = Uri.parse("smsto:");
+                Uri uri = Uri.parse("smsto:" + phonenumber);
                 Intent it = new Intent(Intent.ACTION_SENDTO, uri);
                 it.putExtra("sms_body", "I would Like to rent ur bike");
                 startActivity(it);
