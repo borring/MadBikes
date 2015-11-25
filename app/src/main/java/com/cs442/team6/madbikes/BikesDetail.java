@@ -102,12 +102,12 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
                         "mailto",mailid, null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "bike rental");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "");
-                startActivity(Intent.createChooser(emailIntent, "i would like to rent ur bike."));
+                startActivity(Intent.createChooser(emailIntent, "I would like to rent your bike."));
                 break;
             case R.id.button2:
                 Uri uri = Uri.parse("smsto:" + phonenumber);
                 Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-                it.putExtra("sms_body", "I would Like to rent ur bike");
+                it.putExtra("sms_body", "I would like to rent your bike.");
                 startActivity(it);
         }
         }
