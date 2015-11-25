@@ -20,30 +20,34 @@ public class DummyData {
         if (util.numUsers() > 0) {
             return;
         }
-        util.addUser("cshe", "Congwei She", "12255555", "123");
-        util.addUser("cmoy", "Chester Moy", "12255556", "234");
-        util.addUser("ggadhvi", "Gaurav Gadhvi", "12255557", "567");
-        util.addUser("aarshok", "Arjun Arshok", "12255558", "890");
+        util.addUser("cshe@gmail.com", "Congwei She", "12255555", "123");
+        util.addUser("cmoy@gmail.com", "Chester Moy", "12255556", "234");
+        util.addUser("ggadhvi@gmail.com", "Gaurav Gadhvi", "12255557", "567");
+        util.addUser("aarshok@gmail.com", "Arjun Arshok", "12255558", "890");
 
+    //    (int UID, String bname, String address, double lat, double lng, String state, float rate)
         util.addBike(
-                util.getUID("cmoy"),
+                util.getUID("cmoy@gmail.com"),
                 "Black Allez Alluminum Body",
+                "3001 s king dr",
                 41.838310,
                 -87.627371,
                 "Brand new",
                 (float)5.00
         );
         util.addBike(
-                util.getUID("ggadhvi"),
+                util.getUID("ggadhvi@gmail.com"),
                 "Fastest Bike GG no Re",
+                "2801 s king dr",
                 41.832620,
                 -87.615028,
                 "Brand new",
                 (float)5.00
         );
         util.addBike(
-                util.getUID("aarshok"),
+                util.getUID("aarshok@gmail.com"),
                 "N/A",
+                "2951 s king dr",
                 41.837289,
                 -87.623354,
                 "USB doesn't work",
