@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.sign_up_button:
                 Intent intent = new Intent(MainActivity.this, SignUp.class);
                 this.startActivity(intent);
-                //  } else {
-                //  Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
-                //  }
                 break;
 
             case R.id.sign_in_button:

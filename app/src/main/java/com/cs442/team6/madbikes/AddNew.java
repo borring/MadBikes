@@ -60,7 +60,6 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
                 addressL= addresses.get(0);
                 double geoLatitude = addressL.getLatitude()*1000000;
                 double geoLongitude = addressL.getLongitude()*1000000;
-
                 SharedPreferences spref = getSharedPreferences(newBike.AUTH_FILE, Context.MODE_PRIVATE);
                 String username = spref.getString(newBike.AUTH_NAME, "N/A");
                 Log.d("addnew", "Username is " + username);

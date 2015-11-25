@@ -58,8 +58,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             }
             Utilities util = new Utilities(this);
             if(util.isExisted(et_email.getText().toString())==false){
-                util.addUser(et_email.getText().toString(),et_name.getText().toString(),et_phone.getText().toString(),et_password.getText().toString());
-                Intent intent = new Intent(SignUp.this, MainActivity.class);
+                util.addUser(et_email.getText().toString(), et_name.getText().toString(), et_phone.getText().toString(), et_password.getText().toString());
+                Intent intent = new Intent(SignUp.this, AfterSignUp.class);
                 this.startActivity(intent);}
             else
                 Toast.makeText(SignUp.this,"USERNAME EXISTED, TRY ANOTHER USERNAME", Toast.LENGTH_LONG).show();
