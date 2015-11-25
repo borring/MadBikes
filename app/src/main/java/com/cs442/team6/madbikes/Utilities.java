@@ -27,6 +27,7 @@ public class Utilities {
     // Sharedpref AUTH flag
     String AUTH_FILE = "auth";
     String AUTH_FLAG = "isAuth";
+    String AUTH_NAME = "username";
 
 	Utilities(Context c) {
 		this.c = c;
@@ -167,7 +168,8 @@ public class Utilities {
         cur.close();
         SharedPreferences pref = c.getSharedPreferences(AUTH_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(AUTH_FLAG, false);
+        editor.putString(AUTH_NAME, username);
+        editor.putBoolean(AUTH_FLAG, true);
         editor.commit();
         return true;
     }
