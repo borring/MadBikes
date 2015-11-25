@@ -198,9 +198,10 @@ public class Utilities {
             return true;
     }
 
-    public void addUser(String uname, String name, String phon, String passwd) {
+    public long addUser(String uname, String name, String phon, String passwd) {
         if (closed) {
             Log.d("util/addUser", "db closed. Cannot add user");
+            return -1;
         }
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.USERS.USERNAME, uname);
@@ -209,11 +210,13 @@ public class Utilities {
         cvals.put(dbhelper.USERS.PASSWORD, hashPasswd(passwd));
         long rowid = db.insert(dbhelper.USERS.TABLE_NAME, null, cvals);
         Log.d("util/addUser", "Added " + rowid + " users");
+        return rowid;
     }
 
-    public void updateUser(int UID, String name, String phon, String passwd) {
+    public long updateUser(int UID, String name, String phon, String passwd) {
         if (closed) {
             Log.d("util/addUser", "db closed. Cannot add user");
+            return -1;
         }
         String where = dbhelper.USERS.UID + " = ?";
         String[] whereArgs = {Integer.toString(UID)};
@@ -224,6 +227,7 @@ public class Utilities {
         cvals.put(dbhelper.USERS.PASSWORD, hashPasswd(passwd));
         long rowid = db.update(dbhelper.USERS.TABLE_NAME, cvals, where, whereArgs);
         Log.d("util/updateUser", "Updated user " + UID);
+        return rowid;
     }
 
     public void addBike(int UID, String bname, String address, double lat, double lng, String state, float rate) {
