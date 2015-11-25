@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_bname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bike Name"
+        android:textSize="14dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/list_bavail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available"
+        android:textSize="14dp"
+        android:textColor="#00FF00"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/list_brate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$5.25/hr"
+        android:layout_below="@id/list_bname"/>
+    <TextView
+        android:id="@+id/list_bcondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brand New"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/list_bname"
+        android:layout_toRightOf="@id/list_brate"/>
+    <TextView
+        android:id="@+id/list_BID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+</RelativeLayout>

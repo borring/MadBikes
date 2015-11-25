@@ -75,6 +75,8 @@ public class MapsActivity extends ActionBarActivity implements
         if (id == R.id.mp) {
             startActivity(new Intent(this, ManageProfile.class));
             return true;
+        } else if (id == R.id.list) {
+            startActivity(new Intent(this, ListOfBike.class));
         } else {
             NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
         }

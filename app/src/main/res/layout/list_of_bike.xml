@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="com.cs442.team6.madbikes.ListOfBike">
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bikes_detail"/>
+        android:id="@+id/blistview"/>
 </android.support.design.widget.CoordinatorLayout>
