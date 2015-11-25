@@ -1,5 +1,6 @@
 package com.cs442.team6.madbikes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import android.widget.Toast;
  */
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
-
+    public Context signUpContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +45,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             et_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             EditText et_confirm_password = (EditText) findViewById(R.id.confirm_pass);
             et_confirm_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            if(!et_password.toString().equals(et_confirm_password.toString())){
+            if(!(et_password.getText().toString()).equals((et_confirm_password.getText().toString().trim()))){
                 Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();}
-            if(et_phone.toString().length()!=10){
+            if(et_phone.getText().toString().length()!=10){
                 Toast.makeText(SignUp.this,"WRONG PHONE NUMBER FORMAT", Toast.LENGTH_LONG).show();
-            }
-            else{
-                new Utilities(this).addUser(et_email.toString(),et_name.toString(),et_phone.toString(),et_password.toString());
-                Intent intent = new Intent(SignUp.this, MapsActivity.class);
+            } if(!et_email.getText().toString().contains("@")){
+            Toast.makeText(SignUp.this,"WRONG EMAIL FORMAT", Toast.LENGTH_LONG).show();}
+            if(new Utilities(signUpContext).isExisted(et_email.getText().toString())==false){
+                new Utilities(this).addUser(et_email.getText().toString(),et_name.getText().toString(),et_phone.getText().toString(),et_password.getText().toString());
+                Intent intent = new Intent(SignUp.this, MainActivity.class);
                 this.startActivity(intent);}
+            else
+                Toast.makeText(SignUp.this,"USERNAME EXISTED, TRY ANOTHER USERNAME", Toast.LENGTH_LONG).show();
             break;
         case R.id.cancel:
             Intent intent1 = new Intent(SignUp.this, MainActivity.class);
