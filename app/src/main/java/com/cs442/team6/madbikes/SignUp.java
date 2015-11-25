@@ -33,6 +33,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     switch(v.getId()){
         case R.id.submit:
+
             EditText et_phone = (EditText) findViewById(R.id.Pnumber);
             et_phone.setInputType(InputType.TYPE_CLASS_PHONE);
             EditText et_email = (EditText) findViewById(R.id.email);
@@ -45,14 +46,19 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             et_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             EditText et_confirm_password = (EditText) findViewById(R.id.confirm_pass);
             et_confirm_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
             if(!(et_password.getText().toString()).equals((et_confirm_password.getText().toString().trim()))){
-                Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();}
+                Toast.makeText(SignUp.this,"INCORRECT PASSWORD. VERIFY PASSWORD", Toast.LENGTH_LONG).show();
+            }
             if(et_phone.getText().toString().length()!=10){
                 Toast.makeText(SignUp.this,"WRONG PHONE NUMBER FORMAT", Toast.LENGTH_LONG).show();
-            } if(!et_email.getText().toString().contains("@")){
-            Toast.makeText(SignUp.this,"WRONG EMAIL FORMAT", Toast.LENGTH_LONG).show();}
-            if(new Utilities(signUpContext).isExisted(et_email.getText().toString())==false){
-                new Utilities(this).addUser(et_email.getText().toString(),et_name.getText().toString(),et_phone.getText().toString(),et_password.getText().toString());
+            }
+            if(!et_email.getText().toString().contains("@")){
+                Toast.makeText(SignUp.this,"WRONG EMAIL FORMAT", Toast.LENGTH_LONG).show();
+            }
+            Utilities util = new Utilities(this);
+            if(util.isExisted(et_email.getText().toString())==false){
+                util.addUser(et_email.getText().toString(),et_name.getText().toString(),et_phone.getText().toString(),et_password.getText().toString());
                 Intent intent = new Intent(SignUp.this, MainActivity.class);
                 this.startActivity(intent);}
             else
