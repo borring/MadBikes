@@ -315,6 +315,10 @@ public class Utilities {
             cur.close();
             return -1;
         }
+        if (cur.getCount() == 0) {
+            cur.close();
+            return -1;
+        }
         cur.moveToFirst();
         ret = cur.getInt(cur.getColumnIndex(dbhelper.USERS.UID));
         cur.close();
