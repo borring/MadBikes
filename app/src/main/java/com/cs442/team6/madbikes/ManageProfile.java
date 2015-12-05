@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,11 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 public class ManageProfile extends AppCompatActivity implements View.OnClickListener {
 
     final Context context = this;
+    static final String UID_KEY = "UID";
+    int UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +48,32 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
         add.setOnClickListener(this);
         delete.setOnClickListener(this);
         edit.setOnClickListener(this);
+        Intent intent = getIntent();
+        UID = intent.getIntExtra(UID_KEY, -1);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Utilities util = new Utilities(this);
+        String uname = util.getName(UID);
+        String umail = util.getUsername(UID);
+        String uphone = util.getPhone(UID);
+        //LatLng latlng = util.getBikeLatLng(BID);
+        //boolean avail = util.getBikeAvail(BID);
+
+        ((TextView) findViewById(R.id.user)).setText(uname);
+        ((TextView) findViewById(R.id.ea)).setText(umail);
+//        ((TextView) findViewById(R.id.bavailable)).setTextColor(avail ? Color.GREEN : Color.RED);
+//        ((TextView) findViewById(R.id.brate)).setText(
+//                String.format("$%.2f/hr", brate)
+//        );
+        ((TextView) findViewById(R.id.pn)).setText(uphone);
+//        ((TextView) findViewById(R.id.blocation)).setText(
+//                "Lat " + latlng.latitude + "\n"
+//                        + "Lng " + latlng.longitude
+//        );
+    }
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_new:
