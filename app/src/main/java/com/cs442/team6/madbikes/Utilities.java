@@ -192,7 +192,7 @@ public class Utilities {
 
     //check if the username hase existed
     public boolean isExisted(String username){
-        if(getUID(username)==-1){
+        if(this.getUID(username)==-1){
             return false;
         }else
             return true;
@@ -635,6 +635,25 @@ public class Utilities {
         }
         cur.moveToFirst();
         float ret = cur.getFloat(cur.getColumnIndex(dbhelper.BIKES.RATE));
+        cur.close();
+        return ret;
+    }
+
+    public String getBikeAddr(int BID){
+        if(closed){
+            return "closed";
+        }
+        String [] columns ={
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.ADDRESS,
+        };
+        String where= dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        Cursor cur=db.query(dbhelper.BIKES.TABLE_NAME, columns, where, whereArgs, null, null, null);
+        if (cur==null|| cur.getColumnCount()<=0)
+            return "No Bike";
+        cur.moveToFirst();
+        String ret = cur.getString(cur.getColumnIndex(SQLHelper.Bikes.ADDRESS));
         cur.close();
         return ret;
     }

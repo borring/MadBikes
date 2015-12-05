@@ -71,6 +71,7 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
         float brate = util.getBikeRate(BID);
         LatLng latlng = util.getBikeLatLng(BID);
         boolean avail = util.getBikeAvail(BID);
+        String address= util.getBikeAddr(BID);
 
         ((TextView) findViewById(R.id.bname)).setText(bname);
         ((TextView) findViewById(R.id.bavailable)).setText(avail ? "yes":"no");
@@ -79,10 +80,12 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
                 String.format("$%.2f/hr", brate)
         );
         ((TextView) findViewById(R.id.bcondition)).setText(bcond);
-        ((TextView) findViewById(R.id.blocation)).setText(
-                "Lat " + latlng.latitude + "\n"
-                        + "Lng " + latlng.longitude
-        );
+//        ((TextView) findViewById(R.id.blocation)).setText(
+//                "Lat " + latlng.latitude + "\n"
+//                        + "Lng " + latlng.longitude
+//        );
+
+        ((TextView) findViewById(R.id.baddress)).setText(address);
     }
 
     @Override

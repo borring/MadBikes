@@ -53,5 +53,15 @@ public class DummyData {
                 "USB doesn't work",
                 (float)5.00
         );
+
+        util.addBike(
+                util.getUID("cshe@gmail.com"),
+                "Giant",
+                "2951 s fedral street",
+                42.837289,
+                -88.623354,
+                "Like New",
+                (float)15.00
+        );
     }
 }

@@ -28,6 +28,7 @@
             android:textSize="33dp"
             android:textStyle="bold"
             android:textColor="#000000"
+            android:layout_marginTop="20dp"
             android:layout_alignParentRight="true"/>
 
         <TextView
@@ -87,7 +88,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/brate"/>
 
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -104,7 +105,7 @@
             android:textSize="25dp"
             android:textColor="#000000"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/bcondition"/>
+            android:layout_below="@id/bcondition"/-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,7 +114,7 @@
             android:text="Address:"
             android:textSize="20dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/blocation"/>
+            android:layout_below="@id/bcondition"/>
         <TextView
             android:id="@+id/baddress"
             android:layout_width="200dp"
@@ -123,7 +124,7 @@
             android:textSize="25dp"
             android:textColor="#000000"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/blocation"/>
+            android:layout_below="@id/bcondition"/>
     </RelativeLayout>
 
     <Button

@@ -40,8 +40,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             et_email.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
             EditText et_name = (EditText) findViewById(R.id.Name);
             et_name.setInputType(InputType.TYPE_CLASS_TEXT);
-            EditText et_address = (EditText) findViewById(R.id.user_address);
-            et_address.setInputType(InputType.TYPE_CLASS_TEXT);
+           // EditText et_address = (EditText) findViewById(R.id.user_address);
+           // et_address.setInputType(InputType.TYPE_CLASS_TEXT);
             EditText et_password = (EditText) findViewById(R.id.sign_up_pass);
             et_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
             EditText et_confirm_password = (EditText) findViewById(R.id.confirm_pass);
