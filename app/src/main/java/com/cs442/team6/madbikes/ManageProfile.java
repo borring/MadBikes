@@ -86,6 +86,7 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
                 true
         );
         bikelist.setAdapter(customAdapter);
+        util.close();
         //bikelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         //    @Override
         //    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
