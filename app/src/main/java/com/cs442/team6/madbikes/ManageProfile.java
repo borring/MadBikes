@@ -4,18 +4,22 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +77,37 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
 //                "Lat " + latlng.latitude + "\n"
 //                        + "Lng " + latlng.longitude
 //        );
+
+        Cursor cur = util.getBikeCur(util.getUID(util.getLoggedInUser()));
+        ListView bikelist = (ListView) findViewById(R.id.manage_bikelist);
+        ManageBikeCursorAdapter customAdapter = new ManageBikeCursorAdapter(
+                this,
+                cur,
+                true
+        );
+        bikelist.setAdapter(customAdapter);
+        //bikelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //    @Override
+        //    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //        TextView bidview = (TextView) view.findViewById(R.id.list_BID);
+        //        Intent bikedetails = new Intent(getBaseContext(), BikesDetail.class);
+        //        bikedetails.putExtra(BikesDetail.BID_KEY, Integer.parseInt(bidview.getText().toString()));
+        //        startActivity(bikedetails);
+        //    }
+        //});
+    }
+    public void deleteBike(View view) {
+        TextView bid_textview = (TextView) ((View) view.getParent()).findViewById(R.id.list_BID);
+        if (bid_textview == null) {
+            return;
+        }
+        int bid = Integer.parseInt(bid_textview.getText().toString());
+        Utilities util = new Utilities(this);
+        util.deleteBike(bid);
+        util.close();
+        finish();
+        startActivity(getIntent());
+        Log.d("ManageProfile/bikelist", "Delete bike BID: " + bid_textview.getText().toString());
     }
     public void onClick(View view) {
         switch (view.getId()) {
