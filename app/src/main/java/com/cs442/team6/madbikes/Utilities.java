@@ -268,6 +268,15 @@ public class Utilities {
         db.update(dbhelper.BIKES.TABLE_NAME, cvals, where, whereArgs);
     }
 
+    public void deleteBike(int BID) {
+        if (closed) {
+            Log.d("util/deleteBike", "db closed. Cannot delete bike");
+        }
+        String where = dbhelper.BIKES.BID + " = ?";
+        String[] whereArgs = {Integer.toString(BID)};
+        db.delete(dbhelper.BIKES.TABLE_NAME, where, whereArgs);
+    }
+
     public int numUsers() {
         if (closed) {
             Log.d("util/numUsers", "db closed. Cannot get numUsers");
@@ -355,6 +364,10 @@ public class Utilities {
             cur.close();
             return null;
         }
+        if (cur.getCount() == 0) {
+            cur.close();
+            return null;
+        }
         cur.moveToFirst();
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.USERNAME));
         cur.close();
@@ -383,6 +396,10 @@ public class Utilities {
                 null
         );
         if (cur == null) {
+            cur.close();
+            return null;
+        }
+        if (cur.getCount() <= 0) {
             cur.close();
             return null;
         }
@@ -417,6 +434,10 @@ public class Utilities {
             cur.close();
             return null;
         }
+        if (cur.getCount() <= 0) {
+            cur.close();
+            return null;
+        }
         cur.moveToFirst();
         ret = cur.getString(cur.getColumnIndex(dbhelper.USERS.PHONE));
         cur.close();
@@ -443,6 +464,36 @@ public class Utilities {
                 columns,
                 null,
                 null,
+                null,
+                null,
+                null
+        );
+        return cur;
+    }
+
+    public Cursor getBikeCur(int UID) {
+        if (closed) {
+            return null;
+        }
+        String[] columns = {
+                dbhelper.BIKES.BID,
+                dbhelper.BIKES.UID,
+                dbhelper.BIKES.NAME,
+                dbhelper.BIKES.ISAVAILABLE,
+                dbhelper.BIKES.RATE,
+                dbhelper.BIKES.CONDITION,
+                dbhelper.BIKES.LIKES,
+                dbhelper.BIKES.IMAGE_KEY,
+                dbhelper.BIKES.LAT,
+                dbhelper.BIKES.LONG
+        };
+        String where = dbhelper.BIKES.UID + " = ?";
+        String[] whereArgs = {Integer.toString(UID)};
+        Cursor cur = db.query(
+                dbhelper.BIKES.TABLE_NAME,
+                columns,
+                where,
+                whereArgs,
                 null,
                 null,
                 null
