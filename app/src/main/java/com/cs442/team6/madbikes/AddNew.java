@@ -103,7 +103,8 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
                 newBike.addBike(newBike.getUID(username), brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
                 newBike.close();
 
-                startActivity(new Intent(AddNew.this, ManageProfile.class));}
+                finish();
+            }
             else{
                  Toast.makeText(getApplicationContext(), "No enough information", Toast.LENGTH_LONG).show();
             }
