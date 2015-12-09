@@ -174,6 +174,11 @@ public class Utilities {
         return true;
     }
 
+    public String getLoggedInUser() {
+        SharedPreferences pref = c.getSharedPreferences(AUTH_FILE, Context.MODE_PRIVATE);
+        return pref.getString(AUTH_NAME, "N/A");
+    }
+
     public byte[] hashPasswd(String passwd) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
