@@ -73,8 +73,11 @@ public class MapsActivity extends ActionBarActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.mp) {
+            Utilities util = new Utilities(this);
+            int uid = util.getUID(util.getLoggedInUser());
+            util.close();
             Intent signin_intent = new Intent(this, ManageProfile.class);
-            signin_intent.putExtra(ManageProfile.UID_KEY,1);
+            signin_intent.putExtra(ManageProfile.UID_KEY,uid);
             this.startActivity(signin_intent);
             //startActivity(new Intent(this, ManageProfile.class));
             return true;
