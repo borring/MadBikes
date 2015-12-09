@@ -36,6 +36,15 @@ public class DummyData {
                 (float)5.00
         );
         util.addBike(
+                util.getUID("cmoy@gmail.com"),
+                "White Allez Alluminum Body",
+                "2951 s king dr",
+                41.838315,
+                -87.627375,
+                "Brand new",
+                (float)5.00
+        );
+        util.addBike(
                 util.getUID("ggadhvi@gmail.com"),
                 "Fastest Bike GG no Re",
                 "2801 s king dr",
@@ -58,8 +67,8 @@ public class DummyData {
                 util.getUID("cshe@gmail.com"),
                 "Giant",
                 "2951 s fedral street",
-                42.837289,
-                -88.623354,
+                42.837296,
+                -88.623360,
                 "Like New",
                 (float)15.00
         );
