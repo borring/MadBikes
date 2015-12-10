@@ -58,6 +58,12 @@ public class MapsActivity extends ActionBarActivity implements
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
     }
 
+    @Override
+    protected void onStart() {
+        refreshMap();
+        super.onStart();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
