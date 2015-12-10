@@ -54,8 +54,16 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.mp) {
-            startActivity(new Intent(this, ManageProfile.class));
+            Utilities util = new Utilities(this);
+            int uid = util.getUID(util.getLoggedInUser());
+            util.close();
+            Intent signin_intent = new Intent(this, ManageProfile.class);
+            signin_intent.putExtra(ManageProfile.UID_KEY,uid);
+            this.startActivity(signin_intent);
+            //startActivity(new Intent(this, ManageProfile.class));
             return true;
+        } else if (id == R.id.list) {
+            startActivity(new Intent(this, ListOfBike.class));
         } else {
             NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
         }
