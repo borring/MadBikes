@@ -16,6 +16,10 @@ public class DummyData {
         util = new Utilities(c);
     }
 
+    public void close() {
+        util.close();
+    }
+
     public void fill() {
         if (util.numUsers() > 0) {
             return;
