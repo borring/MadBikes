@@ -119,6 +119,10 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
                 } catch (IOException e) {
                     Log.d("AddrToGp", e.toString());
                 }
+                if (addresses.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "Invalid Address", Toast.LENGTH_LONG).show();
+                    break;
+                }
                 addressL= addresses.get(0);
                 double geoLatitude = addressL.getLatitude();
                 double geoLongitude = addressL.getLongitude();
