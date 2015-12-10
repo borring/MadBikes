@@ -136,7 +136,7 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
             }
         break;
         case R.id.cancel:
-        startActivity(new Intent(AddNew.this, ManageProfile.class));
+            finish();
         break;
         }
     }
