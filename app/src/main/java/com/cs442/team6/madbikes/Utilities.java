@@ -251,7 +251,7 @@ public class Utilities {
         db.insert(dbhelper.BIKES.TABLE_NAME, null, cvals);
     }
 
-    public void updateBike(int BID, String bname, double lat, double lng, String state, float rate) {
+    public void updateBike(int BID, String bname, String addr, double lat, double lng, String state, float rate) {
         if (closed) {
             Log.d("util/addBike", "db closed. Cannot add bike");
         }
@@ -260,6 +260,7 @@ public class Utilities {
 
         ContentValues cvals = new ContentValues();
         cvals.put(dbhelper.BIKES.NAME, bname);
+        cvals.put(dbhelper.BIKES.ADDRESS, addr);
         cvals.put(dbhelper.BIKES.LAT, lat);
         cvals.put(dbhelper.BIKES.LONG, lng);
         cvals.put(dbhelper.BIKES.RATE, rate);
