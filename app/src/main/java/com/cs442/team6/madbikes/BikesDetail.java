@@ -46,25 +46,8 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.mp) {
-            Utilities util = new Utilities(this);
-            int uid = util.getUID(util.getLoggedInUser());
-            util.close();
-            Intent signin_intent = new Intent(this, ManageProfile.class);
-            signin_intent.putExtra(ManageProfile.UID_KEY,uid);
-            this.startActivity(signin_intent);
-            //startActivity(new Intent(this, ManageProfile.class));
+        if (MainMenu.onOptionsItemSelected(this, item)) {
             return true;
-        } else if (id == R.id.list) {
-            startActivity(new Intent(this, ListOfBike.class));
-        } else {
-            NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
