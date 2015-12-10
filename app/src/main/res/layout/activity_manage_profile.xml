@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="#90CAF9"
     android:clickable="false"
-    android:paddingBottom="10dp">
+    android:padding="15dp">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addbike_fab"
