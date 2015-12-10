@@ -29,6 +29,15 @@ public class MainMenu {
         } else if (id == R.id.list) {
             c.startActivity(new Intent(c, ListOfBike.class));
             return true;
+        } else if (id == R.id.logout) {
+            Utilities util = new Utilities(c);
+            util.logOut();
+            util.close();
+            c.startActivity(
+                    new Intent(c, MainActivity.class).
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            );
+            return true;
         } else {
             Log.d("MainMenu", String.format("Menu item %d is not hooked up to anything", id));
             return false;
