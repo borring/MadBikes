@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         DummyData dum = new DummyData(this);
         dum.fill();
-        util = new Utilities(this);
+        dum.close();
     }
 
     public void onClick(View v) {
@@ -47,12 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 EditText pass = (EditText) findViewById(R.id.password);
                 String username = user.getText().toString().trim();
                 String password = pass.getText().toString().trim();
+                util = new Utilities(this);
                 if (util.authenticate(username, password)) {
                     Intent signin_intent = new Intent(MainActivity.this, MapsActivity.class);
                     this.startActivity(signin_intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Not Valid", Toast.LENGTH_LONG).show();
                 }
+                util.close();
         }
 
     }
