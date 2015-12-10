@@ -107,22 +107,22 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
             if(!brand1.equals("")&&!address1.equals("")&&!condition1.equals("")&&!price1.equals("")){
                 Utilities newBike = new Utilities(this);
               //  public void addBike(int UID, String bname, double lat, double lng, String state, float rate)
-                Geocoder geocoder = new Geocoder(AddNew.this);
+                Geocoder geocoder = new Geocoder(this);
                 List<Address> addresses= null;
                 Address addressL= null;
                 try {
                     addresses= geocoder.getFromLocationName(address1, 1);
                 } catch (IOException e) {
-                    Log.e("AddrToGp", e.toString());
+                    Log.d("AddrToGp", e.toString());
                 }
                 addressL= addresses.get(0);
-                double geoLatitude = addressL.getLatitude()*1000000;
-                double geoLongitude = addressL.getLongitude()*1000000;
-                SharedPreferences spref = getSharedPreferences(newBike.AUTH_FILE, Context.MODE_PRIVATE);
-                String username = spref.getString(newBike.AUTH_NAME, "N/A");
-                Log.d("addnew", "Username is " + username);
+                double geoLatitude = addressL.getLatitude();
+                double geoLongitude = addressL.getLongitude();
 
                 if (BID == -1) {
+                    SharedPreferences spref = getSharedPreferences(newBike.AUTH_FILE, Context.MODE_PRIVATE);
+                    String username = spref.getString(newBike.AUTH_NAME, "N/A");
+                    Log.d("addnew", "Username is " + username);
                     newBike.addBike(newBike.getUID(username), brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
                 } else {
                     newBike.updateBike(BID, brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
