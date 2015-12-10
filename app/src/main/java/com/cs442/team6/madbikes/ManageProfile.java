@@ -46,12 +46,6 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
 //                        .setAction("Action", null).show();
 //            }
 //        });
-        Button add= (Button)findViewById(R.id.add_new);
-        Button edit= (Button)findViewById(R.id.edit_bike1);
-        Button delete= (Button)findViewById(R.id.delete);
-        add.setOnClickListener(this);
-        delete.setOnClickListener(this);
-        edit.setOnClickListener(this);
         Intent intent = getIntent();
         UID = intent.getIntExtra(UID_KEY, -1);
     }
@@ -122,38 +116,8 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     }
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.add_new:
+            case R.id.addbike_fab:
                 startActivity(new Intent(this, AddNew.class));
-                break;
-            case R.id.edit_bike1:
-                startActivity(new Intent(this, EditBike.class));
-                break;
-            case R.id.delete:
-                LayoutInflater li = LayoutInflater.from(context);
-                View promptsView = li.inflate(R.layout.delete_bike, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(promptsView);
-
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        return;
-                                        }
-                                       })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                // show it
-                alertDialog.show();
                 break;
         }
 
