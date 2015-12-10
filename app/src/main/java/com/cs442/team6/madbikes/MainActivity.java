@@ -20,6 +20,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DummyData dum = new DummyData(this);
+        dum.fill();
+        dum.close();
+
+        util = new Utilities(this);
+        boolean isauth = util.isAuthenticated();
+        util.close();
+        if (isauth) {
+            finish();
+            startActivity(
+                    new Intent(this, MapsActivity.class)
+            );
+        }
+
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -29,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button signup=(Button)findViewById(R.id.sign_up_button);
         signin.setOnClickListener(this);
         signup.setOnClickListener(this);
-
-        DummyData dum = new DummyData(this);
-        dum.fill();
-        dum.close();
     }
 
     public void onClick(View v) {
