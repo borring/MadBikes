@@ -174,6 +174,14 @@ public class Utilities {
         return true;
     }
 
+    public void logOut() {
+        SharedPreferences pref = c.getSharedPreferences(AUTH_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(AUTH_NAME, "");
+        editor.putBoolean(AUTH_FLAG, false);
+        editor.commit();
+    }
+
     public String getLoggedInUser() {
         SharedPreferences pref = c.getSharedPreferences(AUTH_FILE, Context.MODE_PRIVATE);
         return pref.getString(AUTH_NAME, "N/A");
