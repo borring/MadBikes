@@ -73,6 +73,10 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
                 break;
             }
         }
+        if (i == m.length) {
+            Log.d("EditBike", String.format("error: bike condition \"%s\" is not in spinner list",util.getBikeCondition(BID)));
+            i = 0;
+        }
         spinner.setSelection(i);
         ((EditText) findViewById(R.id.brand)).setText(util.getBikeName(BID));
         ((EditText) findViewById(R.id.address)).setText(util.getBikeAddr(BID));
