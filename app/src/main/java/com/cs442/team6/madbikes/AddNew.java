@@ -1,5 +1,6 @@
 package com.cs442.team6.madbikes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,8 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
     private ArrayAdapter<String> adapter;
 
     public Context c;
+    int BID;
+    static final String BID_KEY = "BID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,24 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
 
         //设置默认值
         spinner.setVisibility(View.VISIBLE);
+
+        Intent intent = getIntent();
+        BID = intent.getIntExtra(BID_KEY, -1);
+        if(BID == -1) {
+            return;
+        }
+        Utilities util = new Utilities(this);
+        int i = 0;
+        for (i = 0; i < m.length; i++) {
+            if (m[i].equals(util.getBikeCondition(BID))) {
+                break;
+            }
+        }
+        spinner.setSelection(i);
+        ((EditText) findViewById(R.id.brand)).setText(util.getBikeName(BID));
+        ((EditText) findViewById(R.id.address)).setText(util.getBikeAddr(BID));
+        ((EditText) findViewById(R.id.new_price)).setText(String.format("%.02f", util.getBikeRate(BID)));
+        util.close();
     }
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
@@ -100,7 +121,12 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
                 SharedPreferences spref = getSharedPreferences(newBike.AUTH_FILE, Context.MODE_PRIVATE);
                 String username = spref.getString(newBike.AUTH_NAME, "N/A");
                 Log.d("addnew", "Username is " + username);
-                newBike.addBike(newBike.getUID(username), brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
+
+                if (BID == -1) {
+                    newBike.addBike(newBike.getUID(username), brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
+                } else {
+                    newBike.updateBike(BID, brand1, address1, geoLatitude, geoLongitude, condition1, Float.parseFloat(price1));
+                }
                 newBike.close();
 
                 finish();

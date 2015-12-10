@@ -87,15 +87,15 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
         );
         bikelist.setAdapter(customAdapter);
         util.close();
-        //bikelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //    @Override
-        //    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //        TextView bidview = (TextView) view.findViewById(R.id.list_BID);
-        //        Intent bikedetails = new Intent(getBaseContext(), BikesDetail.class);
-        //        bikedetails.putExtra(BikesDetail.BID_KEY, Integer.parseInt(bidview.getText().toString()));
-        //        startActivity(bikedetails);
-        //    }
-        //});
+        bikelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView bidview = (TextView) view.findViewById(R.id.list_BID);
+                Intent bikedetails = new Intent(getBaseContext(), BikesDetail.class);
+                bikedetails.putExtra(BikesDetail.BID_KEY, Integer.parseInt(bidview.getText().toString()));
+                startActivity(bikedetails);
+            }
+        });
     }
     public void deleteBike(View view) {
         TextView bid_textview = (TextView) ((View) view.getParent()).findViewById(R.id.list_BID);
@@ -109,6 +109,16 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
         finish();
         startActivity(getIntent());
         Log.d("ManageProfile/bikelist", "Delete bike BID: " + bid_textview.getText().toString());
+    }
+    public void editBike(View view) {
+        TextView bid_textview = (TextView) ((View) view.getParent()).findViewById(R.id.list_BID);
+        if (bid_textview == null) {
+            return;
+        }
+        int bid = Integer.parseInt(bid_textview.getText().toString());
+        Intent editbike = new Intent(getBaseContext(), AddNew.class);
+        editbike.putExtra(AddNew.BID_KEY, bid);
+        startActivity(editbike);
     }
     public void onClick(View view) {
         switch (view.getId()) {
