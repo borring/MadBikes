@@ -32,7 +32,7 @@
                 android:layout_weight="5"
                 android:scaleType="center"
                 android:src="@drawable/t2"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 />
 
             <TextView android:text="Mad Bike Z"
