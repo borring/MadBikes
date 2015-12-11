@@ -33,7 +33,6 @@ public class BikesDetail extends AppCompatActivity implements View.OnClickListen
         Button b2=(Button)findViewById(R.id.button2);
         b2.setOnClickListener(this);
         /*end of segment*/
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Intent intent = getIntent();
         BID = intent.getIntExtra(BID_KEY, -1);
     }
