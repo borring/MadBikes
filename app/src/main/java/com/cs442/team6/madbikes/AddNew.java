@@ -46,19 +46,10 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
 
         view = (TextView) findViewById(R.id.add_condition);
         spinner = (Spinner) findViewById(R.id.spinner_condition);
-        //将可选内容与ArrayAdapter连接起来
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
-
-        //设置下拉列表的风格
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //将adapter 添加到spinner中
         spinner.setAdapter(adapter);
-
-        //添加事件Spinner事件监听
         spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
-
-        //设置默认值
         spinner.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
@@ -94,7 +85,6 @@ public class AddNew extends AppCompatActivity implements View.OnClickListener{
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
-
 
     public void onClick(View v){
         switch(v.getId()){
