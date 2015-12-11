@@ -32,34 +32,26 @@ public class DummyData {
     //    (int UID, String bname, String address, double lat, double lng, String state, float rate)
         util.addBike(
                 util.getUID("cmoy@gmail.com"),
-                "Black Allez Alluminum Body",
+                "Allez",
                 "3001 s king drive Chicago",
                 41.838310,
                 -87.627371,
                 "New",
                 (float)5.00
         );
+
         util.addBike(
                 util.getUID("cmoy@gmail.com"),
-                "Grey Allez Alluminum Body",
-                "3001 s king drive Chicago",
-                41.838312,
-                -87.627373,
-                "New",
-                (float)5.00
-        );
-        util.addBike(
-                util.getUID("cmoy@gmail.com"),
-                "White Allez Alluminum Body",
-                "3001 s king drive Chicago",
-                41.838308,
-                -87.627369,
+                "Black Titan",
+                "2345 S Wentworth Ave",
+                41.849794,
+                -87.631722,
                 "New",
                 (float)5.00
         );
         util.addBike(
                 util.getUID("ggadhvi@gmail.com"),
-                "Red Mangoose",
+                "Mangoose",
                 "2801 s king drive Chicago",
                 41.832620,
                 -87.615028,
@@ -69,9 +61,9 @@ public class DummyData {
         util.addBike(
                 util.getUID("ggadhvi@gmail.com"),
                 "Blue Mangoose",
-                "2801 s king drive Chicago",
-                41.832622,
-                -87.615030,
+                "233 S Wacker Dr",
+                41.878885,
+                -87.635878,
                 "New",
                 (float)5.00
         );
@@ -96,9 +88,9 @@ public class DummyData {
         util.addBike(
                 util.getUID("aashokk@gmail.com"),
                 "Blue Schwinn Wayfarer",
-                "2951 s king drive Chicago",
-                41.837287,
-                -87.623352,
+                "5 S Wabash Ave",
+                40.450530,
+                -85.379590,
                 "Good",
                 (float)5.00
         );
@@ -113,12 +105,22 @@ public class DummyData {
         );
         util.addBike(
                 util.getUID("cshe@gmail.com"),
-                "White Kulana Womens",
-                "2951 s federal street Chicago",
-                42.837298,
-                -88.623362,
+                "Schwinn",
+                "2035 S State St",
+                40.138997,
+                -111.614410,
                 "Like New",
                 (float)15.00
+        );
+
+        util.addBike(
+                util.getUID("cshe@gmail.com"),
+                "Giant",
+                "1859 S Ashland Ave",
+                44.497189,
+                -88.041585,
+                "New",
+                (float)10.00
         );
     }
 }
